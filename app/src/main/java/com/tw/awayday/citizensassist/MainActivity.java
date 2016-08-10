@@ -61,5 +61,4 @@ public class MainActivity extends AppCompatActivity {
             imageView.setImageBitmap(imageBitmap);
         }
     }
-
 }

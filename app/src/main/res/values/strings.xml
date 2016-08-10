@@ -8,4 +8,5 @@
     <string name="my_profile">My profile</string>
     <string name="facebook_app_id">834040300060812</string>
     <string name="complaint_image">ComplaintImage</string>
+    <string name="e_mail">E-mail</string>
 </resources>

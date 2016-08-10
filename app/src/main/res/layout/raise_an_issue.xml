@@ -9,9 +9,10 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="CAPTURE IMAGE" />
+        android:text="CAPTURE IMAGE"
+        android:layout_above="@+id/submitButton"
+        android:layout_alignRight="@+id/submitButton"
+        android:layout_alignEnd="@+id/submitButton" />
 
 
     <ImageView
@@ -30,9 +31,41 @@
         android:layout_height="wrap_content"
         android:text="Submit"
         android:id="@+id/submitButton"
-        android:layout_marginBottom="60dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Raise an Issue"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/abc_action_button_min_width_overflow_material"
+        android:background="@color/abc_background_cache_hint_selector_material_light" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Category"
+        android:id="@+id/textView2"
+        android:textSize="@dimen/abc_action_bar_icon_vertical_padding_material"
+        android:layout_below="@+id/textView"
+        android:layout_toLeftOf="@+id/button_test"
+        android:layout_toStartOf="@+id/button_test"
+        android:layout_marginTop="84dp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_alignLeft="@+id/submitButton"
+        android:layout_alignStart="@+id/submitButton" />
 
 
 </RelativeLayout>
