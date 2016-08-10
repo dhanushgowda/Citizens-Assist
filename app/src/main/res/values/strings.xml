@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">CitizensAssist</string>
+    <string name="raise_an_issue">Raise an issue</string>
+    <string name="category">Category</string>
+    <string name="view_history">View history</string>
+    <string name="view_all_issues">View all issues</string>
+    <string name="view_trends">View trends</string>
+    <string name="my_profile">My profile</string>
+    <string name="facebook_app_id">834040300060812</string>
 </resources>
