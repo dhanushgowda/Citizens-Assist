@@ -12,9 +12,10 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import static com.tw.awayday.citizensassist.UserCredentials.*;
+
 public class MainActivity extends AppCompatActivity {
 
-    boolean loggedIn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
