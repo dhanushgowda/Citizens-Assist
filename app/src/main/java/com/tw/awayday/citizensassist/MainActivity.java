@@ -16,7 +16,6 @@ import static com.tw.awayday.citizensassist.UserCredentials.*;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,37 +28,12 @@ public class MainActivity extends AppCompatActivity {
         raiseAnIssue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                RaiseIssueController raiseIssueController = new RaiseIssueController(getApplicationContext());
                 if (!loggedIn) {
-                    login();
-                } else
-                    setContentView(R.layout.raise_an_issue);
-            }
-
-            private void login() {
-                LoginButton loginButton;
-                CallbackManager callbackManager;
-                FacebookSdk.sdkInitialize(getApplicationContext());
-                callbackManager = CallbackManager.Factory.create();
-                setContentView(R.layout.login_page);
-                loginButton = (LoginButton) findViewById(R.id.facebook_sign_in_button);
-                loginButton.getLoginBehavior();
-                loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        loggedIn = true;
-                        setContentView(R.layout.raise_an_issue);
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        setContentView(R.layout.login_page);
-                    }
-
-                    @Override
-                    public void onError(FacebookException error) {
-                        setContentView(R.layout.login_page);
-                    }
-                });
+                    new LoginController(getApplicationContext(), raiseIssueController).login();
+                } else {
+                    raiseIssueController.raiseNewIssue();
+                }
             }
         });
     }
