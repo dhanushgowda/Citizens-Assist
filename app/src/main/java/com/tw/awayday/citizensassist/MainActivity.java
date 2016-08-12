@@ -3,107 +3,108 @@ package com.tw.awayday.citizensassist;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
 
-import static android.widget.Toast.*;
+import static android.provider.MediaStore.ACTION_IMAGE_CAPTURE;
+import static android.widget.Toast.LENGTH_LONG;
+import static android.widget.Toast.LENGTH_SHORT;
+import static android.widget.Toast.makeText;
+import static com.koushikdutta.ion.Ion.with;
+import static com.tw.awayday.citizensassist.Constants.REQUEST_IMAGE_CAPTURE;
 import static com.tw.awayday.citizensassist.ServerDetails.SERVER_URL;
 import static com.tw.awayday.citizensassist.ServerDetails.validateUser;
-import static com.tw.awayday.citizensassist.UserCredentials.*;
+import static com.tw.awayday.citizensassist.UserCredentials.currentUser;
+import static com.tw.awayday.citizensassist.UserCredentials.loggedIn;
+import static com.tw.awayday.citizensassist.UserMessages.ERROR_TRY_AGAIN;
+import static com.tw.awayday.citizensassist.UserMessages.LOGIN_FAILED;
+import static com.tw.awayday.citizensassist.UserMessages.OPENING_CAMERA;
+import static com.tw.awayday.citizensassist.UserMessages.WORK_UNDER_PROGRESS;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String ERROR_TRY_AGAIN = "An error occured! Please try again";
-    public static final String LOGIN_FAILED = "Login failed! Please Retry!";
-    ImageView imageView;
-    Button cameraButton;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    private Button submitButton;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (!loggedIn) {
-            setContentView(R.layout.login_page);
-            Button loginButton = (Button) findViewById(R.id.login_button);
-            loginButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    EditText email = (EditText) findViewById(R.id.email);
-                    String userEmail = email.getText().toString();
-                    EditText password = (EditText) findViewById(R.id.pword);
-                    String userPassword = password.getText().toString();
-                    validateUser(userEmail, userPassword);
-                    if (loggedIn) {
-                        setContentView(R.layout.activity_main);
-                    }
-                }
-            });
+            login();
+        } else {
+            home();
         }
+    }
 
+    private void login() {
+        setContentView(R.layout.login_page);
+
+        findViewById(R.id.login_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText email = (EditText) findViewById(R.id.email);
+                EditText password = (EditText) findViewById(R.id.pword);
+                validateUser(email.getText().toString(), password.getText().toString());
+            }
+        });
+    }
+
+    private void home() {
         setContentView(R.layout.activity_main);
 
-
-        setContentView(R.layout.activity_main);
-        Button raiseAnIssue = (Button) findViewById(R.id.raiseIssueButton);
-        raiseAnIssue.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.raiseIssueButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setContentView(R.layout.raise_an_issue);
                 imageView = (ImageView) findViewById(R.id.imageView);
-                cameraButton = (Button) findViewById(R.id.button_test);
-                submitButton = (Button) findViewById(R.id.submitButton);
-                cameraButton.setOnClickListener(new View.OnClickListener() {
+
+                findViewById(R.id.button_test).setOnClickListener(new View.OnClickListener() {
                     public void onClick(View view) {
-                        makeText(getApplicationContext(), "Opening Camera", LENGTH_SHORT).show();
+                        makeText(getApplicationContext(), OPENING_CAMERA, LENGTH_SHORT).show();
                         dispatchTakePictureIntent();
                     }
                 });
-                submitButton.setOnClickListener(new View.OnClickListener() {
+
+                findViewById(R.id.submitButton).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        makeText(getApplicationContext(), "Work under progress", LENGTH_SHORT).show();
+                        makeText(getApplicationContext(), WORK_UNDER_PROGRESS, LENGTH_SHORT).show();
                     }
                 });
             }
         });
     }
 
-
     private void validateUser(final String userEmail, final String userPassword) {
-        User user = new User(userEmail, userPassword);
-        Ion.with(this)
+        with(this)
                 .load(SERVER_URL + validateUser)
-                .setJsonPojoBody(user)
+                .setJsonPojoBody(new User(userEmail, userPassword))
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
                         if (e != null) {
                             makeText(getApplicationContext(), ERROR_TRY_AGAIN, LENGTH_LONG).show();
-                            return;
+                            login();
                         }
 
                         if (result.get("message").getAsString().equals("Failed")) {
                             makeText(getApplicationContext(), LOGIN_FAILED, LENGTH_LONG).show();
-                            return;
+                            login();
                         }
 
                         loggedIn = true;
                         currentUser.is(userEmail, userPassword);
+                        home();
                     }
                 });
     }
 
     private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent takePictureIntent = new Intent(ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }

@@ -9,4 +9,10 @@
     <string name="facebook_app_id">834040300060812</string>
     <string name="complaint_image">ComplaintImage</string>
     <string name="e_mail">E-mail</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="capture_image">CAPTURE IMAGE</string>
+    <string name="submit">Submit</string>
 </resources>
