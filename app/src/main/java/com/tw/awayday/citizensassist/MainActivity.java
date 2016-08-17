@@ -5,10 +5,17 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     ImageView imageView;
@@ -40,6 +47,25 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(getApplicationContext(), "Work under progress", Toast.LENGTH_SHORT).show();
+                        APIService apiService = APIClient.getClient().create(APIService.class);
+                        Call<Image> call = apiService.saveImage(new Image("Random Path"));
+                        System.out.println("pando: ");
+                        call.enqueue(new Callback<Image>() {
+                            @Override
+                            public void onResponse(Call<Image> call, Response<Image> response) {
+
+                                String movies = response.body().getPath();
+                                Toast.makeText(getApplicationContext(), "Received "+movies + " "+response.body(), Toast.LENGTH_LONG).show();
+                                System.out.println("yoda");
+                            }
+
+                            @Override
+                            public void onFailure(Call<Image> call, Throwable t) {
+                                // Log error here since request failed
+                                System.out.println(t.getMessage());
+                                Toast.makeText(getApplicationContext(), "Failed " + t.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }
                 });
             }
