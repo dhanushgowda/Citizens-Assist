@@ -32,17 +32,38 @@
         android:layout_centerHorizontal="true"
         android:text="@string/submit" />
 
+    <!--<TextView-->
+        <!--android:id="@+id/textView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:background="@color/abc_background_cache_hint_selector_material_light"-->
+        <!--android:text="@string/raise_an_issue"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:textColor="@color/colorPrimary"-->
+        <!--android:textSize="@dimen/abc_action_button_min_width_overflow_material" />-->
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@color/abc_background_cache_hint_selector_material_light"
         android:text="@string/raise_an_issue"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/abc_action_button_min_width_overflow_material" />
+        android:textColor="@color/colorPrimary" />
 
+    <!--<TextView-->
+        <!--android:id="@+id/textView2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/textView"-->
+        <!--android:layout_marginTop="84dp"-->
+        <!--android:layout_toLeftOf="@+id/button_test"-->
+        <!--android:layout_toStartOf="@+id/button_test"-->
+        <!--android:text="@string/category"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:textSize="@dimen/abc_action_bar_icon_vertical_padding_material" -->
+        <!--/>-->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -52,8 +73,7 @@
         android:layout_toLeftOf="@+id/button_test"
         android:layout_toStartOf="@+id/button_test"
         android:text="@string/category"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="@dimen/abc_action_bar_icon_vertical_padding_material" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Spinner
         android:id="@+id/spinner"
