@@ -14,7 +14,7 @@ app.use(connect.logger('dev'));
 app.use(connect.bodyParser());
 app.use(connect.json());
 app.use(connect.urlencoded());
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 router.get('/', function(req, res) {
@@ -25,10 +25,15 @@ router.get('/', function(req, res) {
     console.log(req.files.image.originalFilename);
     console.log(req.files.image.path);
 
-    fs.readFile(req.files.image.path, function(err, data) {
-      var dirname = "/home/swathia/Node/file-upload";
-      var newPath = dirname + "/uploads/" + req.files.image.originalFilename;
+    var dir = './image_store';
 
+    if (!fs.existsSync(dir)){
+      fs.mkdirSync(dir);
+    }
+
+    fs.readFile(req.files.image.path, function(err, data) {
+      var newPath = dir + "/" + req.files.image.originalFilename;
+      console.log(newPath);
       fs.writeFile(newPath, data, function(err) {
         if(err) {
           res.json({'response' : "Error"});

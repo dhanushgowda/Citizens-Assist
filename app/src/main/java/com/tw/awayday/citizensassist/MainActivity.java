@@ -1,11 +1,27 @@
 package com.tw.awayday.citizensassist;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.koushikdutta.async.future.Future;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+import com.koushikdutta.ion.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 import static android.provider.MediaStore.ACTION_IMAGE_CAPTURE;
 import static android.widget.Toast.LENGTH_SHORT;
@@ -16,6 +32,7 @@ import static com.tw.awayday.citizensassist.UserMessages.WORK_UNDER_PROGRESS;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
+    private File file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +60,24 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         makeText(getApplicationContext(), WORK_UNDER_PROGRESS, LENGTH_SHORT).show();
+                        Future uploading = Ion.with(MainActivity.this)
+                                .load("http://10.4.22.69:5000/upload")
+                                .setMultipartFile("image", file)
+                                .asString()
+                                .withResponse()
+                                .setCallback(new FutureCallback<Response<String>>() {
+                                    @Override
+                                    public void onCompleted(Exception e, Response<String> result) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(result.getResult());
+                                            Toast.makeText(getApplicationContext(), jsonObject.getString("response"), Toast.LENGTH_SHORT).show();
+
+                                        } catch (JSONException e1) {
+                                            e1.printStackTrace();
+                                        }
+
+                                    }
+                                });
                     }
                 });
             }
@@ -60,8 +95,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
+//            path = getPathFromURI(data.getData());
+
             Bitmap imageBitmap = (Bitmap) extras.get("data");
+            // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
+            Uri tempUri = getImageUri(getApplicationContext(), imageBitmap);
+
+            // CALL THIS METHOD TO GET THE ACTUAL PATH
+            file = new File(getRealPathFromURI(tempUri));
             imageView.setImageBitmap(imageBitmap);
         }
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        String temporaryPath = cursor.getString(idx);
+        cursor.close();
+        return temporaryPath;
     }
 }
