@@ -68,20 +68,20 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="84dp"
-        android:layout_toLeftOf="@+id/button_test"
-        android:layout_toStartOf="@+id/button_test"
         android:text="@string/category"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/textView"
+        android:layout_toLeftOf="@+id/button_test"
+        android:layout_toStartOf="@+id/button_test" />
 
     <Spinner
-        android:id="@+id/spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/complaint_spinner"
         android:layout_alignLeft="@+id/submitButton"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_alignStart="@+id/submitButton"
-        android:layout_alignTop="@+id/textView2" />
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignTop="@+id/textView2"
+        />
+
 </RelativeLayout>

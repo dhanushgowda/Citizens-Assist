@@ -9,4 +9,14 @@
     <string name="complaint_image">ComplaintImage</string>
     <string name="capture_image">CAPTURE IMAGE</string>
     <string name="submit">Submit</string>
+    <string-array name="complaint_categories">
+        <item>Potholes</item>
+        <item>Malfunctioning traffic signal</item>
+        <item>Bad roads</item>
+        <item>Roadside Garbage</item>
+        <item>Clogged drains</item>
+        <item>Bad street lighting</item>
+        <item>Tree debris</item>
+        <item>Water shortage</item>
+    </string-array>
 </resources>

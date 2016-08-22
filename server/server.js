@@ -54,13 +54,13 @@ router.post('/upload', function(req, res) {
             if (!dbSaveErr) {
                 fs.writeFile(newPath, data, function(err) {
                     if (err) {
-                        res.json({ 'response': "Local FS write Error" });
+                        res.json({ 'response': "Local FS write Error", 'success': false });
                     } else {
-                        res.json({ 'response': "Saved" });
+                        res.json({ 'response': "Saved", 'success': true });
                     }
                 });
             } else {
-                res.json({ 'response': "Db save Error" });
+                res.json({ 'response': "Db save Error", 'success': false });
             }
         });
     });

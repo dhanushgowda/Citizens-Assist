@@ -9,7 +9,10 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.koushikdutta.async.future.Future;
@@ -48,6 +51,28 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 setContentView(R.layout.raise_an_issue);
                 imageView = (ImageView) findViewById(R.id.imageView);
+                final Spinner spinner = (Spinner) findViewById(R.id.complaint_spinner);
+
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.complaint_categories, R.layout.spinner_item);
+                adapter.setDropDownViewResource(R.layout.spinner_item);
+                spinner.setAdapter(adapter);
+
+
+//                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                    @Override
+//                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                        // On selecting a spinner item
+//                        String item = adapterView.getItemAtPosition(i).toString();
+//                        // Showing selected spinner item
+//                        Toast.makeText(adapterView.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+//                    }
+//
+//                    @Override
+//                    public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//                    }
+//                });
+
 
                 findViewById(R.id.button_test).setOnClickListener(new View.OnClickListener() {
                     public void onClick(View view) {
@@ -70,8 +95,11 @@ public class MainActivity extends AppCompatActivity {
                                     public void onCompleted(Exception e, Response<String> result) {
                                         try {
                                             JSONObject jsonObject = new JSONObject(result.getResult());
-                                            Toast.makeText(getApplicationContext(), jsonObject.getString("response"), Toast.LENGTH_SHORT).show();
-
+                                            if (jsonObject.getString("success").equals("true")) {
+                                                Toast.makeText(getApplicationContext(), jsonObject.getString("response") + " yoda", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(getApplicationContext(), jsonObject.getString("response"), Toast.LENGTH_SHORT).show();
+                                            }
                                         } catch (JSONException e1) {
                                             e1.printStackTrace();
                                         }
@@ -83,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(ACTION_IMAGE_CAPTURE);
