@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void home() {
         setContentView(R.layout.activity_main);
-
         findViewById(R.id.raiseIssueButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,25 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 imageView = (ImageView) findViewById(R.id.imageView);
                 final Spinner spinner = (Spinner) findViewById(R.id.complaint_spinner);
 
-                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.complaint_categories, R.layout.spinner_item);
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MainActivity.this, R.array.complaint_categories, android.R.layout.simple_spinner_item);
                 adapter.setDropDownViewResource(R.layout.spinner_item);
                 spinner.setAdapter(adapter);
-
-
-//                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                    @Override
-//                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                        // On selecting a spinner item
-//                        String item = adapterView.getItemAtPosition(i).toString();
-//                        // Showing selected spinner item
-//                        Toast.makeText(adapterView.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
-//                    }
-//
-//                    @Override
-//                    public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//                    }
-//                });
 
 
                 findViewById(R.id.button_test).setOnClickListener(new View.OnClickListener() {
