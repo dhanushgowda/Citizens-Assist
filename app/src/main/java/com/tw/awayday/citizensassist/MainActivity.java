@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         makeText(getApplicationContext(), WORK_UNDER_PROGRESS, LENGTH_SHORT).show();
                         Future uploading = Ion.with(MainActivity.this)
-                                .load("http://10.4.22.69:5000/upload")
+                                .load("http://10.4.23.49:5000/upload")
                                 .setMultipartFile("image", file)
                                 .asString()
                                 .withResponse()
