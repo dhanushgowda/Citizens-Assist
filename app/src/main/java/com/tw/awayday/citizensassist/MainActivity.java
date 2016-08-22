@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -56,11 +55,18 @@ public class MainActivity extends AppCompatActivity {
                 adapter.setDropDownViewResource(R.layout.spinner_item);
                 spinner.setAdapter(adapter);
 
-
                 findViewById(R.id.button_test).setOnClickListener(new View.OnClickListener() {
                     public void onClick(View view) {
                         makeText(getApplicationContext(), OPENING_CAMERA, LENGTH_SHORT).show();
                         dispatchTakePictureIntent();
+                    }
+                });
+
+                findViewById(R.id.tag_location).setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View view) {
+                        makeText(getApplicationContext(), "Opening maps", LENGTH_SHORT).show();
+                        Intent myIntent = new Intent(MainActivity.this, MapsActivity.class);
+                        startActivity(myIntent);
                     }
                 });
 

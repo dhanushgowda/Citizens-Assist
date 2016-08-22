@@ -19,4 +19,6 @@
         <item>Tree debris</item>
         <item>Water shortage</item>
     </string-array>
+    <string name="title_activity_maps">Map</string>
+    <string name="tag_location">TAG LOCATION</string>
 </resources>

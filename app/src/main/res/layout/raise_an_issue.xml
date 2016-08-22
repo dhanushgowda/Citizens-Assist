@@ -32,6 +32,7 @@
         android:layout_centerHorizontal="true"
         android:text="@string/submit" />
 
+
     <!--<TextView-->
         <!--android:id="@+id/textView"-->
         <!--android:layout_width="match_parent"-->
@@ -83,5 +84,13 @@
         android:layout_alignBottom="@+id/textView2"
         android:layout_alignTop="@+id/textView2"
         />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tag_location"
+        android:id="@+id/tag_location"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
