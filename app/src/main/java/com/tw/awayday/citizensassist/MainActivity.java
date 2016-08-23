@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.tag_location).setOnClickListener(new View.OnClickListener() {
                     public void onClick(View view) {
                         makeText(getApplicationContext(), "Opening maps", LENGTH_SHORT).show();
-                        Intent myIntent = new Intent(MainActivity.this, MapsActivity.class);
+                        Intent myIntent = new Intent(MainActivity.this, LocationFetcherActivity.class);
                         startActivity(myIntent);
                     }
                 });
