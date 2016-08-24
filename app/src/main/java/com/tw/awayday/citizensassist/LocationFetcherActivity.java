@@ -74,26 +74,25 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
                 .build();
 
         setContentView(R.layout.activity_location_fetcher);
-//        btnFusedLocation = (Button) findViewById(R.id.show_location);
-//        tvLocation = (TextView) findViewById(R.id.tvLocation);
-//        btnFusedLocation.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View arg0) {
-//                updateUI();
+        btnFusedLocation = (Button) findViewById(R.id.show_location);
+        tvLocation = (TextView) findViewById(R.id.tvLocation);
+        btnFusedLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                updateUI();
 //                String dataToSend = null;
 //                try {
 //                    dataToSend = prepareDataToSend();
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }
-////                Communicator communicator = new Communicator();
-////                communicator.setData(dataToSend);
-////                communicator.execute();
-//                Toast.makeText(getApplicationContext(), "Your new location has been updated successfully", Toast.LENGTH_LONG).show();
-//            }
-//        });
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.maps);
+//                Communicator communicator = new Communicator();
+//                communicator.setData(dataToSend);
+//                communicator.execute();
+                Toast.makeText(getApplicationContext(), "Your new location has been updated successfully", Toast.LENGTH_SHORT).show();
+            }
+        });
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map123);
         mapFragment.getMapAsync(this);
 
 
@@ -104,18 +103,18 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
         mMap = googleMap;
     }
 
-    private String prepareDataToSend() throws IOException {
-        TelephonyManager telephonyManager;
-        telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        imsistring = telephonyManager.getSubscriberId();
-        Log.d(TAG, "Device id: " + imsistring);
-        String dataToSend = URLEncoder.encode("device_id", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(imsistring), "UTF-8");
-        dataToSend += "&" + URLEncoder.encode("latitude", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(mCurrentLocation.getLatitude()), "UTF-8");
-        dataToSend += "&" + URLEncoder.encode("longitude", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(mCurrentLocation.getLongitude()), "UTF-8");
-        dataToSend += "&" + URLEncoder.encode("accuracy", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(mCurrentLocation.getAccuracy()), "UTF-8");
-        dataToSend += "&" + URLEncoder.encode("time", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(mCurrentLocation.getTime()), "UTF-8");
-        return dataToSend;
-    }
+//    private String prepareDataToSend() throws IOException {
+//        TelephonyManager telephonyManager;
+//        telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+//        imsistring = telephonyManager.getSubscriberId();
+//        Log.d(TAG, "Device id: " + imsistring);
+//        String dataToSend = URLEncoder.encode("device_id", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(imsistring), "UTF-8");
+//        dataToSend += "&" + URLEncoder.encode("latitude", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(mCurrentLocation.getLatitude()), "UTF-8");
+//        dataToSend += "&" + URLEncoder.encode("longitude", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(mCurrentLocation.getLongitude()), "UTF-8");
+//        dataToSend += "&" + URLEncoder.encode("accuracy", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(mCurrentLocation.getAccuracy()), "UTF-8");
+//        dataToSend += "&" + URLEncoder.encode("time", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(mCurrentLocation.getTime()), "UTF-8");
+//        return dataToSend;
+//    }
 
 
     @Override
@@ -174,7 +173,7 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
     public void onLocationChanged(Location location) {
         Log.d(TAG, "Firing onLocationChanged..............................................");
         mCurrentLocation = location;
-//        enableOrDisableButton();
+        enableOrDisableButton();
         mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
         updateUI();
     }
@@ -194,13 +193,12 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
         if (null != mCurrentLocation) {
             String lat = String.valueOf(mCurrentLocation.getLatitude());
             String lng = String.valueOf(mCurrentLocation.getLongitude());
-//            tvLocation.setText("At Time: " + mLastUpdateTime + "\n" +
-//                    "Latitude: " + lat + "\n" +
-//                    "Longitude: " + lng + "\n" +
-//                    "Accuracy: " + mCurrentLocation.getAccuracy());
-            Toast.makeText(getApplicationContext(),"yolo " + lat + lng,Toast.LENGTH_LONG).show();
+            tvLocation.setText("At Time: " + mLastUpdateTime + "\n" +
+                    "Latitude: " + lat + "\n" +
+                    "Longitude: " + lng + "\n" +
+                    "Accuracy: " + mCurrentLocation.getAccuracy());
             LatLng point = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
-//            btnFusedLocation.setText("Send your location \n Accurate to " + mCurrentLocation.getAccuracy() + " meters");
+            btnFusedLocation.setText("Send your location \n Accurate to " + mCurrentLocation.getAccuracy() + " meters");
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             mMap.clear();
             mMap.getUiSettings().setZoomControlsEnabled(true);
