@@ -3,6 +3,8 @@ package com.tw.awayday.citizensassist;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -27,18 +29,26 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class LocationFetcherActivity extends FragmentActivity implements LocationListener,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback {
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback,
+        GoogleMap.OnMarkerDragListener{
     private GoogleMap mMap;
-
+    private Geocoder geocoder;
+    private List<Address> addresses;
+    private boolean dragged;
     private static final String TAG = "LocationActivity";
     private static final long INTERVAL = 1000 * 10;
     private static final long FASTEST_INTERVAL = 1000 * 5;
@@ -48,6 +58,8 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
     GoogleApiClient mGoogleApiClient;
     Location mCurrentLocation;
     String mLastUpdateTime;
+    private double latitude;
+    private double longitude;
     URLConnection urlConnection;
     String imsistring = null;
 
@@ -73,22 +85,16 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
                 .addOnConnectionFailedListener(this)
                 .build();
 
+        geocoder = new Geocoder(this, Locale.getDefault());
+
         setContentView(R.layout.activity_location_fetcher);
         btnFusedLocation = (Button) findViewById(R.id.show_location);
         tvLocation = (TextView) findViewById(R.id.tvLocation);
+
         btnFusedLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 updateUI();
-//                String dataToSend = null;
-//                try {
-//                    dataToSend = prepareDataToSend();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                Communicator communicator = new Communicator();
-//                communicator.setData(dataToSend);
-//                communicator.execute();
                 Toast.makeText(getApplicationContext(), "Your new location has been updated successfully", Toast.LENGTH_SHORT).show();
             }
         });
@@ -101,21 +107,18 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+            @Override
+            public boolean onMyLocationButtonClick() {
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Example de Message for Android",
+                        Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+//        updateUI();
     }
-
-//    private String prepareDataToSend() throws IOException {
-//        TelephonyManager telephonyManager;
-//        telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-//        imsistring = telephonyManager.getSubscriberId();
-//        Log.d(TAG, "Device id: " + imsistring);
-//        String dataToSend = URLEncoder.encode("device_id", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(imsistring), "UTF-8");
-//        dataToSend += "&" + URLEncoder.encode("latitude", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(mCurrentLocation.getLatitude()), "UTF-8");
-//        dataToSend += "&" + URLEncoder.encode("longitude", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(mCurrentLocation.getLongitude()), "UTF-8");
-//        dataToSend += "&" + URLEncoder.encode("accuracy", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(mCurrentLocation.getAccuracy()), "UTF-8");
-//        dataToSend += "&" + URLEncoder.encode("time", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(mCurrentLocation.getTime()), "UTF-8");
-//        return dataToSend;
-//    }
-
 
     @Override
     public void onStart() {
@@ -175,7 +178,7 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
         mCurrentLocation = location;
         enableOrDisableButton();
         mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
-        updateUI();
+//        updateUI();
     }
 
     private void enableOrDisableButton() {
@@ -190,14 +193,31 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
 
     private void updateUI() {
         Log.d(TAG, "UI update initiated .............");
-        if (null != mCurrentLocation) {
-            String lat = String.valueOf(mCurrentLocation.getLatitude());
-            String lng = String.valueOf(mCurrentLocation.getLongitude());
+        if (null != mCurrentLocation && !dragged) {
+            latitude = mCurrentLocation.getLatitude();
+            longitude = mCurrentLocation.getLongitude();
+            String lat = String.valueOf(latitude);
+            String lng = String.valueOf(longitude);
+            String address = "";
+            String city = "";
+            try {
+                addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                address = addresses.get(0).getAddressLine(0);
+                city = addresses.get(0).getLocality();
+//                String state = addresses.get(0).getAdminArea();
+//                String country = addresses.get(0).getCountryName();
+//                String postalCode = addresses.get(0).getPostalCode();
+//                String knownName = addresses.get(0).getFeatureName();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
             tvLocation.setText("At Time: " + mLastUpdateTime + "\n" +
-                    "Latitude: " + lat + "\n" +
-                    "Longitude: " + lng + "\n" +
+                    "Address: " + address + "\n" +
+                    "City: " + city + "\n" +
                     "Accuracy: " + mCurrentLocation.getAccuracy());
-            LatLng point = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+            LatLng point = new LatLng(latitude, longitude);
             btnFusedLocation.setText("Send your location \n Accurate to " + mCurrentLocation.getAccuracy() + " meters");
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             mMap.clear();
@@ -209,11 +229,17 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
             }
             mMap.setMyLocationEnabled(true);
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 16));
+            Marker marker = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(latitude, longitude))
+                    .title("Current Location")
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                    .draggable(true));
 
         } else {
             Log.d(TAG, "location is null ...............");
         }
     }
+
 
     @Override
     protected void onPause() {
@@ -237,4 +263,21 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
     }
 
 
+    @Override
+    public void onMarkerDragStart(Marker marker) {
+
+    }
+
+    @Override
+    public void onMarkerDrag(Marker marker) {
+
+    }
+
+    @Override
+    public void onMarkerDragEnd(Marker marker) {
+        LatLng position = marker.getPosition();
+        longitude = position.longitude;
+        latitude = position.latitude;
+        dragged=true;
+    }
 }
