@@ -25,7 +25,8 @@
         android:background="#c0d5d6"
         android:text="@string/view_history"
         android:textColor="#182589"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/viewTrendsButton"
@@ -46,6 +47,7 @@
         android:layout_marginTop="35dp"
         android:background="#c0d5d6"
         android:text="@string/my_profile"
+        android:visibility="gone"
         android:textColor="#182589"
         android:textStyle="bold" />
 

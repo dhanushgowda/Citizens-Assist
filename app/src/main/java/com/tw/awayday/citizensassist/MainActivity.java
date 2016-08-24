@@ -19,5 +19,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(raiseIssue);
             }
         });
+
+        findViewById(R.id.viewTrendsButton).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent viewTrends = new Intent(MainActivity.this, ViewTrendsActivity.class);
+                startActivity(viewTrends);
+            }
+        });
     }
 }

@@ -42,7 +42,7 @@ public class RaiseIssueActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.raise_an_issue);
+        setContentView(R.layout.activity_raise_an_issue);
         imageView = (ImageView) findViewById(R.id.imageView);
         final Spinner spinner = (Spinner) findViewById(R.id.complaint_spinner);
 
