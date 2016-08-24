@@ -87,9 +87,17 @@ public class RaiseIssueActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(result.getResult());
                             if (jsonObject.getString("success").equals("true")) {
-                                makeText(getApplicationContext(), jsonObject.getString("response") + " yoda", LENGTH_SHORT).show();
+                                setContentView(R.layout.raise_issue_success);
+                                findViewById(R.id.homeButton).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent mainActivity = new Intent(RaiseIssueActivity.this, MainActivity.class);
+                                        mainActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                        startActivity(mainActivity);
+                                    }
+                                });
                             } else {
-                                makeText(getApplicationContext(), jsonObject.getString("response"), LENGTH_SHORT).show();
+                                makeText(getApplicationContext(), jsonObject.getString("response") + "Oops..Try again!", LENGTH_SHORT).show();
                             }
                         } catch (JSONException e1) {
                             e1.printStackTrace();
