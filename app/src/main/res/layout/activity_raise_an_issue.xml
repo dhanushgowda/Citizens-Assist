@@ -3,32 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/captureImageButton"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:text="@string/capture_image" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_above="@+id/submitButton"
-        android:layout_alignLeft="@+id/captureImageButton"
-        android:layout_alignStart="@+id/captureImageButton"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/complaint_image" />
-
-    <Button
-        android:id="@+id/submitButton"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/submit" />
 
     <TextView
         android:id="@+id/textView"
@@ -43,14 +17,14 @@
         android:id="@+id/category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="34dp"
         android:text="@string/category"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Spinner
         android:id="@+id/complaint_spinner"
@@ -62,12 +36,64 @@
         android:layout_toEndOf="@+id/category"
         android:layout_toRightOf="@+id/category" />
 
-    <Button
+    <TextView
+        android:id="@+id/tagLocationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tagLocationButton"
+        android:layout_alignLeft="@+id/tagLocationButton"
+        android:layout_alignStart="@+id/tagLocationButton"
+        android:layout_marginBottom="28dp"
+        android:text="   Tag Location"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+    <ImageButton
         android:id="@+id/tagLocationButton"
+        android:layout_width="140dip"
+        android:layout_height="140dip"
+        android:background="@mipmap/tag_location_icon"
+        android:layout_alignBottom="@+id/captureImageButton"
+        android:layout_alignLeft="@+id/category"
+        android:layout_alignStart="@+id/category" />
+
+    <TextView
+        android:id="@+id/captureImageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="    Capture Image"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignTop="@+id/tagLocationText"
+        android:layout_alignLeft="@+id/captureImageButton"
+        android:layout_alignStart="@+id/captureImageButton" />
+
+    <ImageButton
+        android:id="@+id/captureImageButton"
+        android:layout_width="150dip"
+        android:layout_height="150dip"
+        android:layout_alignEnd="@+id/complaint_spinner"
+        android:layout_alignRight="@+id/complaint_spinner"
+        android:layout_below="@+id/category"
+        android:layout_marginTop="74dp"
+        android:background="@mipmap/capture_image_icon" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/complaint_image"
+        android:layout_above="@+id/submitButton"
+        android:layout_alignLeft="@+id/submitButton"
+        android:layout_alignStart="@+id/submitButton" />
+
+
+    <Button
+        android:id="@+id/submitButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/captureImageButton"
-        android:layout_centerHorizontal="true"
-        android:text="@string/tag_location" />
+        android:text="@string/submit"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/complaint_spinner"
+        android:layout_alignStart="@+id/complaint_spinner" />
 
 </RelativeLayout>
