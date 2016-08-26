@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.tw.awayday.citizensassist.Models.IssueAddress;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,7 +39,6 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
         GoogleMap.OnMarkerDragListener {
     private GoogleMap mMap;
     private Geocoder geocoder;
-    private List<Address> addresses;
     private boolean dragged;
     private static final String TAG = "LocationActivity";
     private static final long INTERVAL = 1000 * 10;
@@ -48,7 +48,6 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
     Location mCurrentLocation;
-    String mLastUpdateTime;
     private double latitude;
     private double longitude;
     private Marker marker;
@@ -77,6 +76,7 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
             public void onClick(View arg0) {
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("Position", marker.getPosition());
+//                resultIntent.putExtra("IssueAddress", marker.getPosition());
                 setResult(Activity.RESULT_OK, resultIntent);
                 finish();
             }
@@ -125,7 +125,6 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
     public void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
-
     }
 
     @Override
@@ -133,7 +132,6 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
         super.onStop();
         mGoogleApiClient.disconnect();
     }
-
 
     @Override
     public void onConnected(Bundle bundle) {
@@ -155,24 +153,15 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
         if (null != mCurrentLocation && !dragged) {
             latitude = mCurrentLocation.getLatitude();
             longitude = mCurrentLocation.getLongitude();
-            String address = "";
-            String city = "";
+            IssueAddress issueAddress;
+
             try {
-                addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                address = addresses.get(0).getAddressLine(0);
-                city = addresses.get(0).getLocality();
-//                String state = addresses.get(0).getAdminArea();
-//                String country = addresses.get(0).getCountryName();
-//                String postalCode = addresses.get(0).getPostalCode();
-//                String knownName = addresses.get(0).getFeatureName();
+                issueAddress = getIssueAddress(geocoder.getFromLocation(latitude, longitude, 1));
+                tvLocation.setText(issueAddress.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            tvLocation.setText("At Time: " + mLastUpdateTime + "\n" +
-                    "Address: " + address + "\n" +
-                    "City: " + city + "\n" +
-                    "Accuracy: " + mCurrentLocation.getAccuracy());
             LatLng point = new LatLng(latitude, longitude);
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             mMap.clear();
@@ -193,6 +182,13 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
         }
     }
 
+    private IssueAddress getIssueAddress(List<Address> addresses) {
+        return new IssueAddress().setAddressLine(addresses.get(0).getAddressLine(0))
+                .setCity(addresses.get(0).getLocality())
+                .setCountry(addresses.get(0).getCountryName())
+                .setState(addresses.get(0).getAdminArea());
+    }
+
     @Override
     public void onConnectionSuspended(int i) {
 
@@ -209,7 +205,6 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
 //        mCurrentLocation = location;
 //        showCurrentLocationOnMap();
     }
-
 
     @Override
     protected void onPause() {
@@ -231,7 +226,6 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
             Log.d(TAG, "Location update resumed ....................");
         }
     }
-
 
     @Override
     public void onMarkerDragStart(Marker marker) {
