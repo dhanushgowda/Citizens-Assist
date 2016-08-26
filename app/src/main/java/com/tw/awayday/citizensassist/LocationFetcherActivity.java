@@ -72,8 +72,13 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
             @Override
             public void onClick(View arg0) {
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("Position", marker.getPosition());
-//                resultIntent.putExtra("IssueAddress", marker.getPosition());
+                LatLng position = marker.getPosition();
+                resultIntent.putExtra("Position", position);
+                try {
+                    resultIntent.putExtra("IssueAddress",getIssueAddress(geocoder.getFromLocation(position.latitude, position.longitude, 1)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 setResult(Activity.RESULT_OK, resultIntent);
                 finish();
             }

@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import com.google.android.gms.maps.model.LatLng;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Response;
+import com.tw.awayday.citizensassist.Models.IssueAddress;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -126,10 +127,8 @@ public class RaiseIssueActivity extends AppCompatActivity {
             imageView.setImageBitmap(imageBitmap);
         }
         if (requestCode == Constants.TAG_LOCATION && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            LatLng position = (LatLng) extras.get("Position");
-            makeText(getApplicationContext(), String.valueOf(position.latitude) + " yo " +
-                    String.valueOf(position.longitude), LENGTH_SHORT).show();
+            IssueAddress issueAddress= (IssueAddress) data.getParcelableExtra("IssueAddress");
+            makeText(getApplicationContext(), issueAddress.toString(), LENGTH_SHORT).show();
         }
     }
 

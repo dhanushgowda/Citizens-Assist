@@ -1,11 +1,16 @@
 package com.tw.awayday.citizensassist.Models;
 
-public class IssueAddress {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class IssueAddress implements Parcelable {
     private String addressLine;
     private String city;
     private String state;
     private String country;
 
+    public IssueAddress() {
+    }
 
     public IssueAddress setAddressLine(String addressLine) {
         this.addressLine = addressLine;
@@ -26,6 +31,7 @@ public class IssueAddress {
         this.country = country;
         return this;
     }
+
     @Override
     public String toString() {
         return "AddressLine: " + addressLine + "\n" +
@@ -33,4 +39,37 @@ public class IssueAddress {
                 "State: " + state + "\n" +
                 "Country: " + country;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(addressLine);
+        parcel.writeString(city);
+        parcel.writeString(state);
+        parcel.writeString(country);
+    }
+
+    private IssueAddress(Parcel in) {
+        this.addressLine = in.readString();
+        this.city = in.readString();
+        this.state = in.readString();
+        this.country = in.readString();
+    }
+
+    public static final Parcelable.Creator<IssueAddress> CREATOR = new Parcelable.Creator<IssueAddress>() {
+
+        @Override
+        public IssueAddress createFromParcel(Parcel source) {
+            return new IssueAddress(source);
+        }
+
+        @Override
+        public IssueAddress[] newArray(int size) {
+            return new IssueAddress[size];
+        }
+    };
 }
