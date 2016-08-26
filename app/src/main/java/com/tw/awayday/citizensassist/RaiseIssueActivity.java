@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.koushikdutta.async.future.FutureCallback;
@@ -34,8 +35,6 @@ import static com.tw.awayday.citizensassist.Constants.REQUEST_IMAGE_CAPTURE;
 import static com.tw.awayday.citizensassist.ServerDetails.SERVER_URL;
 import static com.tw.awayday.citizensassist.ServerDetails.UPLOAD;
 import static com.tw.awayday.citizensassist.UserMessages.IMAGE;
-import static com.tw.awayday.citizensassist.UserMessages.OPENING_CAMERA;
-import static com.tw.awayday.citizensassist.UserMessages.OPENING_MAPS;
 
 public class RaiseIssueActivity extends AppCompatActivity {
     private ImageView imageView;
@@ -57,14 +56,12 @@ public class RaiseIssueActivity extends AppCompatActivity {
 
         findViewById(R.id.captureImageButton).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                makeText(getApplicationContext(), OPENING_CAMERA, LENGTH_SHORT).show();
                 dispatchTakePictureIntent();
             }
         });
 
         findViewById(R.id.tagLocationButton).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                makeText(getApplicationContext(), OPENING_MAPS, LENGTH_SHORT).show();
                 Intent myIntent = new Intent(RaiseIssueActivity.this, LocationFetcherActivity.class);
                 startActivityForResult(myIntent, Constants.TAG_LOCATION);
             }
@@ -127,8 +124,9 @@ public class RaiseIssueActivity extends AppCompatActivity {
             imageView.setImageBitmap(imageBitmap);
         }
         if (requestCode == Constants.TAG_LOCATION && resultCode == RESULT_OK) {
-            IssueAddress issueAddress= (IssueAddress) data.getParcelableExtra("IssueAddress");
-            makeText(getApplicationContext(), issueAddress.toString(), LENGTH_SHORT).show();
+            IssueAddress issueAddress= data.getParcelableExtra("IssueAddress");
+            TextView textView= (TextView) findViewById(R.id.addressView);
+            textView.setText(issueAddress.toString());
         }
     }
 

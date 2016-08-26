@@ -85,11 +85,12 @@
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_above="@+id/submitButton"
-        android:layout_centerHorizontal="true"
         android:adjustViewBounds="true"
         android:contentDescription="@string/complaint_image"
-        android:src="@mipmap/image_icon" />
+        android:src="@mipmap/image_icon"
+        android:layout_above="@+id/submitButton"
+        android:layout_alignLeft="@+id/captureImageText"
+        android:layout_alignStart="@+id/captureImageText" />
 
     <Button
         android:id="@+id/submitButton"
@@ -99,5 +100,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
         android:text="@string/submit" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addressView"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/submitButton"
+        android:layout_alignRight="@+id/tagLocationText"
+        android:layout_alignEnd="@+id/tagLocationText" />
 
 </RelativeLayout>
