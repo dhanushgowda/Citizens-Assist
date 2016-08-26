@@ -1,34 +1,27 @@
 package com.tw.awayday.citizensassist;
 
-import android.app.Fragment;
-import android.content.Context;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -37,10 +30,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -62,19 +51,7 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
     String mLastUpdateTime;
     private double latitude;
     private double longitude;
-    URLConnection urlConnection;
-    String imsistring = null;
     private Marker marker;
-
-    private LocationManager locationManager;
-    private String provider;
-
-    protected void createLocationRequest() {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(INTERVAL);
-        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,14 +75,33 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
         btnFusedLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-//                updateUI();
-//                updateUI();
-//                Toast.makeText(getApplicationContext(), "Your new location has been updated successfully", Toast.LENGTH_SHORT).show();
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("Position", marker.getPosition());
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
             }
         });
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map123);
         mapFragment.getMapAsync(this);
 
+    }
+
+    private boolean isGooglePlayServicesAvailable() {
+        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (ConnectionResult.SUCCESS == status) {
+            return true;
+        } else {
+            GooglePlayServicesUtil.getErrorDialog(status, this, 0).show();
+            return false;
+        }
+    }
+
+    protected void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(INTERVAL);
+        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
     @Override
@@ -123,13 +119,11 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
                 return true;
             }
         });
-        updateUI();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        Log.d(TAG, "onStart fired ..............");
         mGoogleApiClient.connect();
 
     }
@@ -137,20 +131,9 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
     @Override
     public void onStop() {
         super.onStop();
-        Log.d(TAG, "onStop fired ..............");
         mGoogleApiClient.disconnect();
-        Log.d(TAG, "isConnected ...............: " + mGoogleApiClient.isConnected());
     }
 
-    private boolean isGooglePlayServicesAvailable() {
-        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        if (ConnectionResult.SUCCESS == status) {
-            return true;
-        } else {
-            GooglePlayServicesUtil.getErrorDialog(status, this, 0).show();
-            return false;
-        }
-    }
 
     @Override
     public void onConnected(Bundle bundle) {
@@ -163,51 +146,15 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
             // TODO: Consider calling
             return;
         }
-        PendingResult<Status> pendingResult = LocationServices.FusedLocationApi.requestLocationUpdates(
-                mGoogleApiClient, mLocationRequest, this);
-        Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        mCurrentLocation = lastLocation;
-        updateUI();
-        Log.d(TAG, "Location update started ..............: " + lastLocation.getLatitude() + lastLocation.getLongitude());
-//        updateUI();
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        showCurrentLocationOnMap();
     }
 
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-        Log.d(TAG, "Connection failed: " + connectionResult.toString());
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        Log.d(TAG, "Firing onLocationChanged..............................................");
-//        mCurrentLocation = location;
-//        enableOrDisableButton();
-//        mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
-//        updateUI();
-    }
-
-    private void enableOrDisableButton() {
-        if (mCurrentLocation.getAccuracy() > 100f) {
-            btnFusedLocation.setEnabled(false);
-            btnFusedLocation.setText("Getting the better position...Please wait");
-        } else {
-            btnFusedLocation.setEnabled(true);
-            btnFusedLocation.setText("Send your location");
-        }
-    }
-
-    private void updateUI() {
-        Log.d(TAG, "UI update initiated .............");
+    private void showCurrentLocationOnMap() {
         if (null != mCurrentLocation && !dragged) {
             latitude = mCurrentLocation.getLatitude();
             longitude = mCurrentLocation.getLongitude();
-            String lat = String.valueOf(latitude);
-            String lng = String.valueOf(longitude);
             String address = "";
             String city = "";
             try {
@@ -227,7 +174,6 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
                     "City: " + city + "\n" +
                     "Accuracy: " + mCurrentLocation.getAccuracy());
             LatLng point = new LatLng(latitude, longitude);
-            btnFusedLocation.setText("Send your location \n Accurate to " + mCurrentLocation.getAccuracy() + " meters");
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             mMap.clear();
             mMap.getUiSettings().setZoomControlsEnabled(true);
@@ -243,10 +189,25 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
                     .title("Current Location")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
                     .draggable(true));
-
-        } else {
-            Log.d(TAG, "location is null ...............");
+            mMap.setOnMarkerDragListener(this);
         }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Log.d(TAG, "Connection failed: " + connectionResult.toString());
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        Log.d(TAG, "Firing onLocationChanged..............................................");
+//        mCurrentLocation = location;
+//        showCurrentLocationOnMap();
     }
 
 

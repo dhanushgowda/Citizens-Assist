@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Response;
 
@@ -39,6 +40,7 @@ public class RaiseIssueActivity extends AppCompatActivity {
     private ImageView imageView;
     private File file;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +65,7 @@ public class RaiseIssueActivity extends AppCompatActivity {
             public void onClick(View view) {
                 makeText(getApplicationContext(), OPENING_MAPS, LENGTH_SHORT).show();
                 Intent myIntent = new Intent(RaiseIssueActivity.this, LocationFetcherActivity.class);
-                startActivity(myIntent);
+                startActivityForResult(myIntent, Constants.TAG_LOCATION);
             }
         });
 
@@ -122,6 +124,12 @@ public class RaiseIssueActivity extends AppCompatActivity {
             Uri tempUri = getImageUri(getApplicationContext(), imageBitmap);
             file = new File(getRealPathFromURI(tempUri));
             imageView.setImageBitmap(imageBitmap);
+        }
+        if (requestCode == Constants.TAG_LOCATION && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            LatLng position = (LatLng) extras.get("Position");
+            makeText(getApplicationContext(), String.valueOf(position.latitude) + " yo " +
+                    String.valueOf(position.longitude), LENGTH_SHORT).show();
         }
     }
 
