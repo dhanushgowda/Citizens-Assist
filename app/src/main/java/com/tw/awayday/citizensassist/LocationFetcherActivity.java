@@ -39,7 +39,6 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
         GoogleMap.OnMarkerDragListener {
     private GoogleMap mMap;
     private Geocoder geocoder;
-    private boolean dragged;
     private static final String TAG = "LocationActivity";
     private static final long INTERVAL = 1000 * 10;
     private static final long FASTEST_INTERVAL = 1000 * 5;
@@ -48,8 +47,6 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
     Location mCurrentLocation;
-    private double latitude;
-    private double longitude;
     private Marker marker;
 
     @Override
@@ -110,9 +107,8 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
         mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
             @Override
             public boolean onMyLocationButtonClick() {
-                latitude = mCurrentLocation.getLatitude();
-                longitude = mCurrentLocation.getLongitude();
-                LatLng latLng = new LatLng(latitude, longitude);
+                LatLng latLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+                updateTextViewToDisplayCurrentLocation(latLng);
                 marker.setPosition(latLng);
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
@@ -150,19 +146,9 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
     }
 
     private void showCurrentLocationOnMap() {
-        if (null != mCurrentLocation && !dragged) {
-            latitude = mCurrentLocation.getLatitude();
-            longitude = mCurrentLocation.getLongitude();
-            IssueAddress issueAddress;
-
-            try {
-                issueAddress = getIssueAddress(geocoder.getFromLocation(latitude, longitude, 1));
-                tvLocation.setText(issueAddress.toString());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            LatLng point = new LatLng(latitude, longitude);
+        if (null != mCurrentLocation) {
+            LatLng currentLatLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+            updateTextViewToDisplayCurrentLocation(currentLatLng);
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             mMap.clear();
             mMap.getUiSettings().setZoomControlsEnabled(true);
@@ -172,9 +158,9 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
                 return;
             }
             mMap.setMyLocationEnabled(true);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 16));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 16));
             marker = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(latitude, longitude))
+                    .position(currentLatLng)
                     .title("Current Location")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
                     .draggable(true));
@@ -240,8 +226,16 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
     @Override
     public void onMarkerDragEnd(Marker marker) {
         LatLng position = marker.getPosition();
-        longitude = position.longitude;
-        latitude = position.latitude;
-        dragged = true;
+        updateTextViewToDisplayCurrentLocation(position);
+    }
+
+    private void updateTextViewToDisplayCurrentLocation(LatLng position) {
+        IssueAddress issueAddress;
+        try {
+            issueAddress = getIssueAddress(geocoder.getFromLocation(position.latitude, position.longitude, 1));
+            tvLocation.setText(issueAddress.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
