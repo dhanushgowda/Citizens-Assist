@@ -39,12 +39,10 @@
         android:id="@+id/tagLocationText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/tagLocationButton"
-        android:layout_alignLeft="@+id/tagLocationButton"
-        android:layout_alignStart="@+id/tagLocationButton"
-        android:layout_marginBottom="28dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
+        android:layout_alignLeft="@+id/category"
+        android:layout_alignStart="@+id/category"
+        android:layout_below="@+id/category"
+        android:layout_marginTop="41dp"
         android:text="@string/tag_location"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -52,32 +50,34 @@
         android:id="@+id/captureImageText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/captureImageButton"
-        android:layout_alignStart="@+id/captureImageButton"
+        android:layout_alignEnd="@+id/complaint_spinner"
+        android:layout_alignRight="@+id/complaint_spinner"
         android:layout_alignTop="@+id/tagLocationText"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginRight="38dp"
         android:text="@string/capture_image"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageButton
         android:id="@+id/tagLocationButton"
-        android:layout_width="140dip"
-        android:layout_height="140dip"
+        android:layout_width="60dip"
+        android:layout_height="60dip"
         android:layout_alignBottom="@+id/captureImageButton"
-        android:layout_alignLeft="@+id/category"
-        android:layout_alignStart="@+id/category"
+        android:layout_toLeftOf="@+id/submitButton"
+        android:layout_toStartOf="@+id/submitButton"
         android:background="@mipmap/tag_location_icon"
         android:contentDescription="@string/tag_location" />
 
     <ImageButton
         android:id="@+id/captureImageButton"
-        android:layout_width="150dip"
-        android:layout_height="150dip"
-        android:layout_alignEnd="@+id/complaint_spinner"
-        android:layout_alignRight="@+id/complaint_spinner"
-        android:layout_below="@+id/category"
-        android:layout_marginTop="74dp"
+        android:layout_width="60dip"
+        android:layout_height="60dip"
+        android:layout_alignLeft="@+id/captureImageText"
+        android:layout_alignStart="@+id/captureImageText"
+        android:layout_below="@+id/captureImageText"
+        android:layout_marginLeft="38dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="29dp"
         android:background="@mipmap/capture_image_icon"
         android:contentDescription="@string/capture_image" />
 
@@ -85,12 +85,14 @@
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_above="@+id/submitButton"
+        android:layout_alignLeft="@+id/tagLocationText"
+        android:layout_alignStart="@+id/tagLocationText"
+        android:layout_marginBottom="39dp"
+        android:layout_marginLeft="10dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/complaint_image"
-        android:src="@mipmap/image_icon"
-        android:layout_above="@+id/submitButton"
-        android:layout_alignLeft="@+id/captureImageText"
-        android:layout_alignStart="@+id/captureImageText" />
+        android:src="@mipmap/image_icon" />
 
     <Button
         android:id="@+id/submitButton"
@@ -98,18 +100,28 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="52dp"
         android:text="@string/submit" />
 
     <TextView
+        android:id="@+id/addressView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/comments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/addressView"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignEnd="@+id/captureImageText"
+        android:layout_alignLeft="@+id/captureImageText"
+        android:layout_alignRight="@+id/captureImageText"
+        android:layout_alignStart="@+id/captureImageText"
         android:layout_alignTop="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/submitButton"
-        android:layout_alignRight="@+id/tagLocationText"
-        android:layout_alignEnd="@+id/tagLocationText" />
+        android:hint="@string/comments"
+        android:imeOptions="actionSend"
+        android:inputType="textMultiLine"
+        android:maxLength="255" />
+
 
 </RelativeLayout>

@@ -4,12 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.inputmethodservice.Keyboard;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -66,6 +70,15 @@ public class RaiseIssueActivity extends AppCompatActivity {
                 startActivityForResult(myIntent, Constants.TAG_LOCATION);
             }
         });
+
+        EditText comments = (EditText) findViewById(R.id.comments);
+        comments.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                return actionId == EditorInfo.IME_ACTION_SEND || event.getAction() == KeyEvent.ACTION_DOWN;
+            }
+        });
+
 
         findViewById(R.id.submitButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,8 +137,8 @@ public class RaiseIssueActivity extends AppCompatActivity {
             imageView.setImageBitmap(imageBitmap);
         }
         if (requestCode == Constants.TAG_LOCATION && resultCode == RESULT_OK) {
-            IssueAddress issueAddress= data.getParcelableExtra("IssueAddress");
-            TextView textView= (TextView) findViewById(R.id.addressView);
+            IssueAddress issueAddress = data.getParcelableExtra("IssueAddress");
+            TextView textView = (TextView) findViewById(R.id.addressView);
             textView.setText(issueAddress.toString());
         }
     }

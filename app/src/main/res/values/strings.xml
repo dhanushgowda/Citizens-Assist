@@ -9,6 +9,7 @@
     <string name="complaint_image">ComplaintImage</string>
     <string name="capture_image">CAPTURE IMAGE</string>
     <string name="submit">Submit</string>
+    <string name="comments">Comments</string>
     <string-array name="complaintCategories">
         <item>Potholes</item>
         <item>Malfunctioning traffic signal</item>
@@ -22,5 +23,5 @@
     <string name="title_activity_maps">Map</string>
     <string name="tag_location">TAG LOCATION</string>
     <string name="title_activity_location_fetcher">Map</string>
-    <string name="title_activity_issue_submit_succees">Random</string>
+    <string name="title_activity_issue_submit_success">Random</string>
 </resources>
