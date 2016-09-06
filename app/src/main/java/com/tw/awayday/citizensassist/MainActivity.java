@@ -15,16 +15,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.raiseIssueButton).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent raiseIssue = new Intent(MainActivity.this, RaiseIssueActivity.class);
-                startActivity(raiseIssue);
-            }
-        });
-
-        findViewById(R.id.viewTrendsButton).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent viewTrends = new Intent(MainActivity.this, ViewTrendsActivity.class);
-                startActivity(viewTrends);
+                startActivity(new Intent(MainActivity.this, TagLocationActivity.class));
             }
         });
     }

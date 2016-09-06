@@ -24,4 +24,6 @@
     <string name="tag_location">TAG LOCATION</string>
     <string name="title_activity_location_fetcher">Map</string>
     <string name="title_activity_issue_submit_success">Random</string>
+    <string name="next">Next</string>
+    <string name="title_activity_add_comments">AddComments</string>
 </resources>

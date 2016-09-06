@@ -4,27 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.inputmethodservice.Keyboard;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Response;
 import com.tw.awayday.citizensassist.Models.IssueAddress;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -32,7 +24,6 @@ import java.io.File;
 import static android.graphics.Bitmap.CompressFormat.JPEG;
 import static android.provider.MediaStore.ACTION_IMAGE_CAPTURE;
 import static android.widget.ArrayAdapter.createFromResource;
-import static android.widget.Toast.LENGTH_SHORT;
 import static android.widget.Toast.makeText;
 import static com.koushikdutta.ion.Ion.with;
 import static com.tw.awayday.citizensassist.Constants.REQUEST_IMAGE_CAPTURE;
@@ -40,7 +31,7 @@ import static com.tw.awayday.citizensassist.ServerDetails.SERVER_URL;
 import static com.tw.awayday.citizensassist.ServerDetails.UPLOAD;
 import static com.tw.awayday.citizensassist.UserMessages.IMAGE;
 
-public class RaiseIssueActivity extends AppCompatActivity {
+public class CaptureImageActivity extends AppCompatActivity {
     private ImageView imageView;
     private File file;
 
@@ -54,7 +45,7 @@ public class RaiseIssueActivity extends AppCompatActivity {
 
         int complaintCategories = R.array.complaintCategories;
         int simpleSpinnerItem = android.R.layout.simple_spinner_item;
-        ArrayAdapter<CharSequence> adapter = createFromResource(RaiseIssueActivity.this, complaintCategories, simpleSpinnerItem);
+        ArrayAdapter<CharSequence> adapter = createFromResource(CaptureImageActivity.this, complaintCategories, simpleSpinnerItem);
         adapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(adapter);
 
@@ -64,60 +55,31 @@ public class RaiseIssueActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.tagLocationButton).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent myIntent = new Intent(RaiseIssueActivity.this, LocationFetcherActivity.class);
-                startActivityForResult(myIntent, Constants.TAG_LOCATION);
-            }
-        });
-
-        EditText comments = (EditText) findViewById(R.id.comments);
-        comments.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                return actionId == EditorInfo.IME_ACTION_SEND || event.getAction() == KeyEvent.ACTION_DOWN;
-            }
-        });
-
-
-        findViewById(R.id.submitButton).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.nextButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 postImage();
             }
         });
+
     }
 
     private void postImage() {
-        with(RaiseIssueActivity.this)
+        if (file == null) {
+            file = new File("/Users/nayana/AndroidStudioProjects/Citizens-Assist/app/src/main/res/mipmap-mdpi/image_icon.png");
+        }
+        with(CaptureImageActivity.this)
                 .load(SERVER_URL + UPLOAD)
                 .setMultipartFile(IMAGE, file)
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
-                    @Override
-                    public void onCompleted(Exception e, Response<String> result) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(result.getResult());
-                            if (jsonObject.getString("success").equals("true")) {
-                                setContentView(R.layout.raise_issue_success);
-                                findViewById(R.id.homeButton).setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        Intent mainActivity = new Intent(RaiseIssueActivity.this, MainActivity.class);
-                                        mainActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                                        startActivity(mainActivity);
-                                    }
-                                });
-                            } else {
-                                makeText(getApplicationContext(), jsonObject.getString("response") + "Oops..Try again!", LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e1) {
-                            e1.printStackTrace();
-                        }
-
-                    }
-                });
+                                 @Override
+                                 public void onCompleted(Exception e, Response<String> result) {
+                                     startActivity(new Intent(CaptureImageActivity.this, AddCommentsActivity.class));
+                                 }
+                             }
+                );
     }
 
     private void dispatchTakePictureIntent() {
