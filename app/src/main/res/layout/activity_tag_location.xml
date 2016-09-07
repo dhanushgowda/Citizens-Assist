@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffa6c7"
-    tools:context="com.tw.awayday.citizensassist.LocationFetcherActivity">
+    tools:context=".TagLocationActivity">
 
     <fragment
         android:id="@+id/map123"
@@ -30,7 +30,7 @@
         android:textColor="#ffffffff" />
 
     <TextView
-        android:id="@+id/tvLocation"
+        android:id="@+id/location_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

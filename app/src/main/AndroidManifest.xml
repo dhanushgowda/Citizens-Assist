@@ -43,7 +43,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".LocationFetcherActivity"
+            android:name=".TagLocationActivity"
             android:label="@string/title_activity_location_fetcher" />
         <activity android:name=".CaptureImageActivity" />
         <activity
