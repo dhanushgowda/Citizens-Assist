@@ -98,11 +98,6 @@ public class CaptureImageActivity extends AppCompatActivity {
             file = new File(getRealPathFromURI(tempUri));
             imageView.setImageBitmap(imageBitmap);
         }
-        if (requestCode == Constants.TAG_LOCATION && resultCode == RESULT_OK) {
-            IssueAddress issueAddress = data.getParcelableExtra("IssueAddress");
-            TextView textView = (TextView) findViewById(R.id.addressView);
-            textView.setText(issueAddress.toString());
-        }
     }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {
