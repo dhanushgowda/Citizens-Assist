@@ -11,12 +11,15 @@
         android:id="@+id/raiseIssueButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:background="#c0d5d6"
+        android:drawableLeft="@mipmap/raise_issue"
         android:text="@string/raise_an_issue"
         android:textColor="#182589"
-        android:textStyle="bold"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:textStyle="bold" />
 
 </RelativeLayout>
+
+
