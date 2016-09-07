@@ -66,7 +66,7 @@ public class CaptureImageActivity extends AppCompatActivity {
 
     private void postImage() {
         if (file == null) {
-            file = new File("/Users/nayana/AndroidStudioProjects/Citizens-Assist/app/src/main/res/mipmap-mdpi/image_icon.png");
+            file = new File("@mipmap/image_icon");
         }
         with(CaptureImageActivity.this)
                 .load(SERVER_URL + UPLOAD)
