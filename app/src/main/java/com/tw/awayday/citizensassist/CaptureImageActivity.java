@@ -12,11 +12,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Response;
-import com.tw.awayday.citizensassist.Models.IssueAddress;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -39,7 +37,7 @@ public class CaptureImageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_raise_an_issue);
+        setContentView(R.layout.activity_capture_image);
         imageView = (ImageView) findViewById(R.id.imageView);
         final Spinner spinner = (Spinner) findViewById(R.id.complaint_spinner);
 

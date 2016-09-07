@@ -46,7 +46,6 @@
             android:name=".LocationFetcherActivity"
             android:label="@string/title_activity_location_fetcher" />
         <activity android:name=".CaptureImageActivity" />
-        <activity android:name=".TagLocationActivity" />
         <activity
             android:name=".AddCommentsActivity"
             android:label="@string/title_activity_add_comments"

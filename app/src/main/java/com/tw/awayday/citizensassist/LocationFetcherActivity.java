@@ -34,9 +34,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import static com.google.android.gms.common.api.GoogleApiClient.*;
+import static com.google.android.gms.maps.GoogleMap.*;
+
 public class LocationFetcherActivity extends FragmentActivity implements LocationListener,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback,
-        GoogleMap.OnMarkerDragListener {
+        ConnectionCallbacks, OnConnectionFailedListener, OnMapReadyCallback, OnMarkerDragListener {
     private GoogleMap mMap;
     private Geocoder geocoder;
     private static final String TAG = "LocationActivity";
@@ -57,7 +59,7 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
             finish();
         }
         createLocationRequest();
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+        mGoogleApiClient = new Builder(this)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -75,12 +77,13 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
                 LatLng position = marker.getPosition();
                 resultIntent.putExtra("Position", position);
                 try {
-                    resultIntent.putExtra("IssueAddress",getIssueAddress(geocoder.getFromLocation(position.latitude, position.longitude, 1)));
+                    resultIntent.putExtra("IssueAddress", getIssueAddress(geocoder.getFromLocation(position.latitude, position.longitude, 1)));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 setResult(Activity.RESULT_OK, resultIntent);
-                finish();
+                startActivity(new Intent(LocationFetcherActivity.this, CaptureImageActivity.class));
+
             }
         });
 
@@ -88,6 +91,15 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
         mapFragment.getMapAsync(this);
 
     }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (requestCode == Constants.TAG_LOCATION && resultCode == RESULT_OK) {
+//            IssueAddress issueAddress = data.getParcelableExtra("IssueAddress");
+//            TextView textView = (TextView) findViewById(R.id.addressView);
+//            textView.setText(issueAddress.toString());
+//        }
+//    }
 
     private boolean isGooglePlayServicesAvailable() {
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -109,7 +121,7 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+        mMap.setOnMyLocationButtonClickListener(new OnMyLocationButtonClickListener() {
             @Override
             public boolean onMyLocationButtonClick() {
                 LatLng latLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
@@ -154,7 +166,7 @@ public class LocationFetcherActivity extends FragmentActivity implements Locatio
         if (null != mCurrentLocation) {
             LatLng currentLatLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
             updateTextViewToDisplayCurrentLocation(currentLatLng);
-            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            mMap.setMapType(MAP_TYPE_NORMAL);
             mMap.clear();
             mMap.getUiSettings().setZoomControlsEnabled(true);
             mMap.getUiSettings().setCompassEnabled(true);
