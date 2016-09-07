@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Response;
@@ -28,6 +29,7 @@ import static com.tw.awayday.citizensassist.Constants.REQUEST_IMAGE_CAPTURE;
 import static com.tw.awayday.citizensassist.ServerDetails.SERVER_URL;
 import static com.tw.awayday.citizensassist.ServerDetails.UPLOAD;
 import static com.tw.awayday.citizensassist.UserMessages.IMAGE;
+import static com.tw.awayday.citizensassist.UserMessages.OPENING_CAMERA;
 
 public class CaptureImageActivity extends AppCompatActivity {
     private ImageView imageView;
@@ -49,6 +51,7 @@ public class CaptureImageActivity extends AppCompatActivity {
 
         findViewById(R.id.captureImageButton).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), OPENING_CAMERA, Toast.LENGTH_SHORT).show();
                 dispatchTakePictureIntent();
             }
         });

@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -37,6 +38,8 @@ import java.util.Locale;
 
 import static com.google.android.gms.common.api.GoogleApiClient.*;
 import static com.google.android.gms.maps.GoogleMap.*;
+import static com.tw.awayday.citizensassist.UserMessages.OPENING_CAMERA;
+import static com.tw.awayday.citizensassist.UserMessages.OPENING_MAPS;
 
 public class TagLocationActivity extends FragmentActivity implements LocationListener,
         ConnectionCallbacks, OnConnectionFailedListener, OnMapReadyCallback, OnMarkerDragListener {
@@ -124,6 +127,7 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
 
     @Override
     public void onStart() {
+        Toast.makeText(getApplicationContext(), OPENING_MAPS, Toast.LENGTH_SHORT).show();
         super.onStart();
         googleApiClient.connect();
     }
