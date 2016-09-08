@@ -1,5 +1,6 @@
 package com.tw.awayday.citizensassist;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,7 +15,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -36,17 +36,32 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import static com.google.android.gms.common.api.GoogleApiClient.*;
-import static com.google.android.gms.maps.GoogleMap.*;
-import static com.tw.awayday.citizensassist.UserMessages.OPENING_CAMERA;
+import static android.widget.Toast.LENGTH_SHORT;
+import static android.widget.Toast.makeText;
+import static com.google.android.gms.common.api.GoogleApiClient.Builder;
+import static com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
+import static com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_NORMAL;
+import static com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
+import static com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import static com.tw.awayday.citizensassist.UserMessages.OPENING_MAPS;
 
 public class TagLocationActivity extends FragmentActivity implements LocationListener,
         ConnectionCallbacks, OnConnectionFailedListener, OnMapReadyCallback, OnMarkerDragListener {
 
+    public static final String LOCATION_UPDATE_RESUMED = "Location update resumed";
+    public static final String LOCATION_UPDATE_STOPPED = "Location update stopped";
+    public static final String FIRING_ON_LOCATION_CHANGED = "Firing onLocationChanged";
+    public static final String CONNECTION_FAILED = "Connection failed: ";
+    public static final String CURRENT_LOCATION = "Current Location";
+    public static final String ON_CONNECTED_IS_CONNECTED = "onConnected - isConnected: ";
+    public static final String ISSUE_ADDRESS = "IssueAddress";
+    public static final String POSITION = "Position";
+    private static final String TAG = "LocationActivity";
+    public static final String ON_CREATE = "onCreate ";
+
     private GoogleMap map;
     private Geocoder geocoder;
-    private static final String TAG = "LocationActivity";
     private static final long INTERVAL = 1000 * 10;
     private static final long FASTEST_INTERVAL = 1000 * 5;
 
@@ -60,7 +75,7 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate ");
+        Log.d(TAG, ON_CREATE);
         if (!isGooglePlayServicesAvailable()) {
             finish();
         }
@@ -81,20 +96,20 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
             public void onClick(View arg0) {
                 Intent resultIntent = new Intent();
                 LatLng position = marker.getPosition();
-                resultIntent.putExtra("Position", position);
+                resultIntent.putExtra(POSITION, position);
                 try {
-                    resultIntent.putExtra("IssueAddress", getIssueAddress(geocoder.getFromLocation(position.latitude, position.longitude, 1)));
+                    resultIntent.putExtra(ISSUE_ADDRESS, getIssueAddress(
+                            geocoder.getFromLocation(position.latitude, position.longitude, 1)));
                 } catch (IOException ignored) {
                 }
                 setResult(Activity.RESULT_OK, resultIntent);
                 startActivity(new Intent(TagLocationActivity.this, CaptureImageActivity.class));
-
             }
         });
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map123);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().
+                findFragmentById(R.id.map_fragment);
         mapFragment.getMapAsync(this);
-
     }
 
     private boolean isGooglePlayServicesAvailable() {
@@ -127,7 +142,7 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
 
     @Override
     public void onStart() {
-        Toast.makeText(getApplicationContext(), OPENING_MAPS, Toast.LENGTH_SHORT).show();
+        makeText(getApplicationContext(), OPENING_MAPS, LENGTH_SHORT).show();
         super.onStart();
         googleApiClient.connect();
     }
@@ -140,39 +155,53 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
 
     @Override
     public void onConnected(Bundle bundle) {
-        Log.d(TAG, "onConnected - isConnected: " + googleApiClient.isConnected());
+        Log.d(TAG, ON_CONNECTED_IS_CONNECTED + googleApiClient.isConnected());
         startLocationUpdates();
     }
 
     protected void startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        boolean finePermissionNotGranted = ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED;
+        boolean coarsePermissionNotGranted = ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED;
+
+        if (finePermissionNotGranted && coarsePermissionNotGranted) {
             return;
         }
+
         LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
         currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
         showCurrentLocationOnMap();
     }
 
     private void showCurrentLocationOnMap() {
-        if (null != currentLocation) {
-            LatLng currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-            updateTextViewToDisplayCurrentLocation(currentLatLng);
-            map.setMapType(MAP_TYPE_NORMAL);
-            map.clear();
-            map.getUiSettings().setZoomControlsEnabled(true);
-            map.getUiSettings().setCompassEnabled(true);
-            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                return;
-            }
-            map.setMyLocationEnabled(true);
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 16));
-            marker = map.addMarker(new MarkerOptions()
-                    .position(currentLatLng)
-                    .title("Current Location")
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-                    .draggable(true));
-            map.setOnMarkerDragListener(this);
+        if (currentLocation == null) {
+            return;
         }
+
+        LatLng currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        updateTextViewToDisplayCurrentLocation(currentLatLng);
+        map.setMapType(MAP_TYPE_NORMAL);
+        map.clear();
+        map.getUiSettings().setZoomControlsEnabled(true);
+        map.getUiSettings().setCompassEnabled(true);
+        boolean finePermissionNotGranted = ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED;
+        boolean coarsePermissionNotGranted = ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED;
+
+        if (finePermissionNotGranted && coarsePermissionNotGranted) {
+            return;
+        }
+
+        map.setMyLocationEnabled(true);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 16));
+        marker = map.addMarker(new MarkerOptions()
+                .position(currentLatLng)
+                .title(CURRENT_LOCATION)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                .draggable(true));
+        map.setOnMarkerDragListener(this);
     }
 
     private IssueAddress getIssueAddress(List<Address> addresses) {
@@ -189,12 +218,12 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.d(TAG, "Connection failed: " + connectionResult.toString());
+        Log.d(TAG, CONNECTION_FAILED + connectionResult.toString());
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.d(TAG, "Firing onLocationChanged");
+        Log.d(TAG, FIRING_ON_LOCATION_CHANGED);
     }
 
     @Override
@@ -205,7 +234,7 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
 
     protected void stopLocationUpdates() {
         LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
-        Log.d(TAG, "Location update stopped");
+        Log.d(TAG, LOCATION_UPDATE_STOPPED);
     }
 
     @Override
@@ -213,7 +242,7 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
         super.onResume();
         if (googleApiClient.isConnected()) {
             startLocationUpdates();
-            Log.d(TAG, "Location update resumed");
+            Log.d(TAG, LOCATION_UPDATE_RESUMED);
         }
     }
 
@@ -229,14 +258,13 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
 
     @Override
     public void onMarkerDragEnd(Marker marker) {
-        LatLng position = marker.getPosition();
-        updateTextViewToDisplayCurrentLocation(position);
+        updateTextViewToDisplayCurrentLocation(marker.getPosition());
     }
 
     private void updateTextViewToDisplayCurrentLocation(LatLng position) {
-        IssueAddress issueAddress;
         try {
-            issueAddress = getIssueAddress(geocoder.getFromLocation(position.latitude, position.longitude, 1));
+            IssueAddress issueAddress = getIssueAddress(geocoder.getFromLocation(position.latitude,
+                    position.longitude, 1));
             locationTextView.setText(issueAddress.toString());
         } catch (IOException ignored) {
         }
