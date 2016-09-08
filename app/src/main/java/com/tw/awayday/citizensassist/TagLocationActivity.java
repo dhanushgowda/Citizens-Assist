@@ -49,22 +49,14 @@ import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_NORMAL;
 import static com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
 import static com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import static com.tw.awayday.citizensassist.UserMessages.OPENING_MAPS;
+import static com.tw.awayday.citizensassist.LocationFetcherConstants.*;
+
 
 import static com.tw.awayday.citizensassist.UserMessages.Tag_Location;
 
 public class TagLocationActivity extends FragmentActivity implements LocationListener,
         ConnectionCallbacks, OnConnectionFailedListener, OnMapReadyCallback, OnMarkerDragListener {
 
-    public static final String LOCATION_UPDATE_RESUMED = "Location update resumed";
-    public static final String LOCATION_UPDATE_STOPPED = "Location update stopped";
-    public static final String FIRING_ON_LOCATION_CHANGED = "Firing onLocationChanged";
-    public static final String CONNECTION_FAILED = "Connection failed: ";
-    public static final String CURRENT_LOCATION = "Current Location";
-    public static final String ON_CONNECTED_IS_CONNECTED = "onConnected - isConnected: ";
-    public static final String ISSUE_ADDRESS = "IssueAddress";
-    public static final String POSITION = "Position";
-    private static final String TAG = "LocationActivity";
-    public static final String ON_CREATE = "onCreate ";
 
     private GoogleMap map;
     private Geocoder geocoder;
