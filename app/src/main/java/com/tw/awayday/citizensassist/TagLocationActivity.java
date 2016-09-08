@@ -4,16 +4,20 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -46,6 +50,8 @@ import static com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
 import static com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import static com.tw.awayday.citizensassist.UserMessages.OPENING_MAPS;
 
+import static com.tw.awayday.citizensassist.UserMessages.Tag_Location;
+
 public class TagLocationActivity extends FragmentActivity implements LocationListener,
         ConnectionCallbacks, OnConnectionFailedListener, OnMapReadyCallback, OnMarkerDragListener {
 
@@ -65,7 +71,8 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
     private static final long INTERVAL = 1000 * 10;
     private static final long FASTEST_INTERVAL = 1000 * 5;
 
-    Button showLocationButton;
+
+    Button sendLocationButton;
     TextView locationTextView;
     LocationRequest locationRequest;
     GoogleApiClient googleApiClient;
@@ -79,6 +86,16 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
         if (!isGooglePlayServicesAvailable()) {
             finish();
         }
+
+        Snackbar snack = Snackbar.make(findViewById(android.R.id.content), Tag_Location, Snackbar.LENGTH_LONG);
+        View view = snack.getView();
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+        params.gravity = Gravity.CENTER_VERTICAL;
+        view.setLayoutParams(params);
+        TextView textView = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(Color.YELLOW);
+        snack.show();
+
         createLocationRequest();
         googleApiClient = new Builder(this)
                 .addApi(LocationServices.API)
@@ -88,10 +105,10 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
         geocoder = new Geocoder(this, Locale.getDefault());
         setContentView(R.layout.activity_tag_location);
 
-        showLocationButton = (Button) findViewById(R.id.show_location);
+        sendLocationButton = (Button) findViewById(R.id.send_my_location);
         locationTextView = (TextView) findViewById(R.id.location_view);
 
-        showLocationButton.setOnClickListener(new View.OnClickListener() {
+        sendLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 Intent resultIntent = new Intent();
@@ -143,6 +160,7 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
     @Override
     public void onStart() {
         makeText(getApplicationContext(), OPENING_MAPS, LENGTH_SHORT).show();
+
         super.onStart();
         googleApiClient.connect();
     }
