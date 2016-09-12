@@ -9,6 +9,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import static android.widget.ArrayAdapter.createFromResource;
+import static com.tw.awayday.citizensassist.UserMessages.OPENING_CAMERA;
 import static com.tw.awayday.citizensassist.UserMessages.OPENING_MAPS;
 
 public class CategorySelectionActivity extends AppCompatActivity {
@@ -29,7 +30,6 @@ public class CategorySelectionActivity extends AppCompatActivity {
         findViewById(R.id.nextButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), OPENING_MAPS, Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(CategorySelectionActivity.this, CaptureImageActivity.class));
             }
         });

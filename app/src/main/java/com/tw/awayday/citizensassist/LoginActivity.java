@@ -20,9 +20,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), LOGIN_SUCCESSFUL, Toast.LENGTH_SHORT).show();
-                Intent mainActivity = new Intent(LoginActivity.this, MainActivity.class);
-                mainActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(mainActivity);
+                startActivity(new Intent(LoginActivity.this, TagLocationActivity.class));
+//                mainActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//                startActivity(mainActivity);
             }
         });
     }
