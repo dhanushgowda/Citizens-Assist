@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 newIssue = new IssueContents();
                 startActivity(new Intent(MainActivity.this, TagLocationActivity.class));
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
     }
