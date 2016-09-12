@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:padding="@dimen/activity_vertical_margin"
     tools:context="com.tw.awayday.citizensassist.MainActivity">
 
@@ -14,10 +15,10 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:background="#c0d5d6"
-        android:drawableLeft="@mipmap/raise_issue"
+        android:background="#294a90"
+        android:drawableLeft="@drawable/raise_issue"
         android:text="@string/raise_an_issue"
-        android:textColor="#182589"
+        android:textColor="#2ed2ad"
         android:textStyle="bold" />
 
 </RelativeLayout>

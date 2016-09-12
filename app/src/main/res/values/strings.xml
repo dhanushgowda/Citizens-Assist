@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">CitizensAssist</string>
     <string name="raise_an_issue">Raise an issue</string>
-    <string name="category">Category</string>
+    <string name="category">Select Category</string>
     <string name="view_history">View history</string>
     <string name="view_all_issues">View all issues</string>
     <string name="view_trends">View trends</string>
@@ -40,4 +40,9 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="login">Login</string>
+    <string name="userName">Username</string>
+    <string name="password">Password</string>
+    <string name="addComment">Add Comments</string>
+    <string name="aboutUs">About us</string>
 </resources>

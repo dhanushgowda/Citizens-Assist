@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical">
 
     <TextView
@@ -12,19 +13,25 @@
         android:text="@string/raise_an_issue"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/colorPrimary" />
+    <TextView
+        android:id="@+id/addComments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addComment"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_above="@+id/comments"
+        android:layout_alignLeft="@+id/submitButton"
+        android:layout_alignStart="@+id/submitButton" />
 
 
     <EditText
         android:id="@+id/comments"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="132dp"
+        android:layout_width="200dp"
+        android:layout_height="300dp"
         android:hint="@string/comments"
-        android:imeOptions="actionSend"
-        android:inputType="textMultiLine"
-        android:maxLength="255" />
+        android:layout_above="@+id/submitButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="34dp" />
 
     <Button
         android:id="@+id/submitButton"

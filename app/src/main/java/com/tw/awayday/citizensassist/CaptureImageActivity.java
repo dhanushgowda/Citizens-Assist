@@ -9,9 +9,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
@@ -22,8 +20,6 @@ import java.io.File;
 
 import static android.graphics.Bitmap.CompressFormat.JPEG;
 import static android.provider.MediaStore.ACTION_IMAGE_CAPTURE;
-import static android.widget.ArrayAdapter.createFromResource;
-import static android.widget.Toast.makeText;
 import static com.koushikdutta.ion.Ion.with;
 import static com.tw.awayday.citizensassist.Constants.REQUEST_IMAGE_CAPTURE;
 import static com.tw.awayday.citizensassist.ServerDetails.SERVER_URL;
@@ -41,13 +37,6 @@ public class CaptureImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture_image);
         imageView = (ImageView) findViewById(R.id.imageView);
-        final Spinner spinner = (Spinner) findViewById(R.id.complaint_spinner);
-
-        int complaintCategories = R.array.complaintCategories;
-        int simpleSpinnerItem = android.R.layout.simple_spinner_item;
-        ArrayAdapter<CharSequence> adapter = createFromResource(CaptureImageActivity.this, complaintCategories, simpleSpinnerItem);
-        adapter.setDropDownViewResource(R.layout.spinner_item);
-        spinner.setAdapter(adapter);
 
         findViewById(R.id.captureImageButton).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

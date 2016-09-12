@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
 
     <TextView
         android:id="@+id/textView"
@@ -12,39 +13,17 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/colorPrimary" />
 
-    <TextView
-        android:id="@+id/category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_marginLeft="28dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="34dp"
-        android:text="@string/category"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <Spinner
-        android:id="@+id/complaint_spinner"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/category"
-        android:layout_marginLeft="25dp"
-        android:layout_marginStart="25dp"
-        android:layout_toEndOf="@+id/category"
-        android:layout_toRightOf="@+id/category" />
 
     <TextView
         android:id="@+id/captureImageText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/captureImageButton"
-        android:layout_alignEnd="@+id/nextButton"
-        android:layout_alignRight="@+id/nextButton"
         android:layout_gravity="center_horizontal"
         android:text="@string/capture_image"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_above="@+id/captureImageButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="46dp" />
 
     <ImageButton
         android:id="@+id/captureImageButton"
@@ -54,7 +33,7 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="46dp"
-        android:background="@mipmap/capture_image_icon"
+        android:background="@drawable/capture_image_icon"
         android:contentDescription="@string/capture_image" />
 
     <ImageView
@@ -66,7 +45,7 @@
         android:layout_marginBottom="65dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/complaint_image"
-        android:src="@mipmap/image_icon" />
+        android:src="@drawable/image_icon" />
 
 
     <Button
