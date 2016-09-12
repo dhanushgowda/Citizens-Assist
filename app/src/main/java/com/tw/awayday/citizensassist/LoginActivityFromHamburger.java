@@ -9,7 +9,8 @@ import static android.widget.Toast.LENGTH_SHORT;
 import static android.widget.Toast.makeText;
 import static com.tw.awayday.citizensassist.UserMessages.LOGIN_SUCCESSFUL;
 
-public class LoginActivityFromHamburger extends AppCompatActivity {
+xzpublic class LoginActivityFromHamburger extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
