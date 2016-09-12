@@ -59,14 +59,13 @@ import static com.tw.awayday.citizensassist.UserMessages.Tag_Location;
 public class TagLocationActivity extends FragmentActivity implements LocationListener,
         ConnectionCallbacks, OnConnectionFailedListener, OnMapReadyCallback, OnMarkerDragListener {
 
-
     private GoogleMap map;
     private Geocoder geocoder;
     private static final long INTERVAL = 1000 * 10;
     private static final long FASTEST_INTERVAL = 1000 * 5;
 
-
     Button sendLocationButton;
+    public static LatLng position;
     TextView locationTextView;
     LocationRequest locationRequest;
     GoogleApiClient googleApiClient;
@@ -81,14 +80,14 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
             finish();
         }
 
-        Snackbar snack = Snackbar.make(findViewById(android.R.id.content), Tag_Location, Snackbar.LENGTH_LONG);
-        View view = snack.getView();
-        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
-        params.gravity = Gravity.CENTER_VERTICAL;
-        view.setLayoutParams(params);
-        TextView textView = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), Tag_Location, Snackbar.LENGTH_LONG);
+        View snackbarView = snackbar.getView();
+        FrameLayout.LayoutParams snackbarViewLayoutParams = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+        snackbarViewLayoutParams.gravity = Gravity.CENTER_VERTICAL;
+        snackbarView.setLayoutParams(snackbarViewLayoutParams);
+        TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(Color.YELLOW);
-        snack.show();
+        snackbar.show();
 
         createLocationRequest();
         googleApiClient = new Builder(this)
@@ -106,7 +105,7 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
             @Override
             public void onClick(View arg0) {
                 Intent resultIntent = new Intent();
-                LatLng position = marker.getPosition();
+                position = marker.getPosition();
                 resultIntent.putExtra(POSITION, position);
                 try {
                     resultIntent.putExtra(ISSUE_ADDRESS, getIssueAddress(

@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -31,7 +31,7 @@ import static com.tw.awayday.citizensassist.UserMessages.OPENING_CAMERA;
 public class CaptureImageActivity extends AppCompatActivity {
     private ImageView imageView;
     private File file;
-
+    static String imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,8 +94,8 @@ public class CaptureImageActivity extends AppCompatActivity {
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
+        imagePath = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(imagePath);
     }
 
     public String getRealPathFromURI(Uri uri) {

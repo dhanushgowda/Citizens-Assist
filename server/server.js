@@ -75,6 +75,8 @@ router.get('/uploads/:file', function (req, res) {
     res.end(img, 'binary');
 });
 
+router.post()
+
 app.use('/', router);
 app.listen(5000);
 console.log("Listening to PORT 5000");
