@@ -112,7 +112,7 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
                 } catch (IOException ignored) {
                 }
                 setResult(Activity.RESULT_OK, resultIntent);
-                startActivity(new Intent(TagLocationActivity.this, CaptureImageActivity.class));
+                startActivity(new Intent(TagLocationActivity.this, CategorySelectionActivity.class));
             }
         });
 

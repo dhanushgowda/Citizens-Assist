@@ -30,7 +30,7 @@ public class CategorySelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), OPENING_MAPS, Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(CategorySelectionActivity.this, TagLocationActivity.class));
+                startActivity(new Intent(CategorySelectionActivity.this, CaptureImageActivity.class));
             }
         });
     }
