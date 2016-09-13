@@ -22,6 +22,11 @@ public class LoginActivityToRaiseIssue extends AppCompatActivity {
             public void onClick(View view) {
                 makeText(getApplicationContext(), LOGIN_SUCCESSFUL, LENGTH_SHORT).show();
                 startActivity(new Intent(LoginActivityToRaiseIssue.this, TagLocationActivity.class));
+                UserStatus.loggedIn = true;
+                Toast.makeText(getApplicationContext(), LOGIN_SUCCESSFUL, Toast.LENGTH_SHORT).show();
+                Intent mainActivity = new Intent(LoginActivity.this, TagLocationActivity.class);
+                mainActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(mainActivity);
             }
         });
     }

@@ -13,6 +13,8 @@ import static android.view.View.OnClickListener;
 import static android.widget.Toast.*;
 import static com.tw.awayday.citizensassist.Constants.*;
 import static com.tw.awayday.citizensassist.UserMessages.ALREADY_LOGGED_IN;
+import static com.tw.awayday.citizensassist.UserMessages.OPENING_MAPS;
+import static com.tw.awayday.citizensassist.UserStatus.*;
 
 public class MainActivity extends AppCompatActivity {
     public static IssueContents newIssue;
@@ -32,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
                 newIssue = new IssueContents();
                 startActivity(new Intent(MainActivity.this, TagLocationActivity.class));
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                if (loggedIn) {
+                    startActivity(new Intent(MainActivity.this, TagLocationActivity.class));
+                } else {
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                }
             }
         });
     }
@@ -50,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
                     makeText(getApplicationContext(), ALREADY_LOGGED_IN, LENGTH_SHORT).show();
                 else
                     startActivity(new Intent(MainActivity.this, LoginActivityFromHamburger.class));
+                if (loggedIn) {
+                    loggedIn = false;
+                    Toast.makeText(getApplicationContext(), "Successfully Logged Out", Toast.LENGTH_LONG).show();
+                    return true;
+                }
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
