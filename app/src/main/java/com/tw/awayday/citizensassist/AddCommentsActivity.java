@@ -13,6 +13,7 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import static com.tw.awayday.citizensassist.CaptureImageActivity.*;
+import static com.tw.awayday.citizensassist.MainActivity.*;
 import static com.tw.awayday.citizensassist.ServerDetails.*;
 import static com.tw.awayday.citizensassist.TagLocationActivity.*;
 
@@ -27,11 +28,11 @@ public class AddCommentsActivity extends AppCompatActivity {
         findViewById(R.id.submitButton).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 String userComments = ((EditText) findViewById(R.id.comments)).getText().toString();
-                IssueObject issueObject = new IssueObject(position, imagePath, userComments);
+                newIssue.addComments(userComments);
 
                 Ion.with(getApplicationContext())
                         .load(SERVER_URL + RAISE_ISSUE)
-                        .setJsonPojoBody(issueObject)
+                        .setJsonPojoBody(newIssue)
                         .asJsonObject()
                         .setCallback(new FutureCallback<JsonObject>() {
                             @Override

@@ -7,12 +7,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.tw.awayday.citizensassist.Models.IssueContents;
+
 import static android.view.View.OnClickListener;
 import static android.widget.Toast.*;
 import static com.tw.awayday.citizensassist.Constants.*;
 import static com.tw.awayday.citizensassist.UserMessages.ALREADY_LOGGED_IN;
 
 public class MainActivity extends AppCompatActivity {
+    public static IssueContents newIssue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     startActivity(new Intent(MainActivity.this, LoginActivityToRaiseIssue.class));
                 }
+                newIssue = new IssueContents();
+                startActivity(new Intent(MainActivity.this, TagLocationActivity.class));
             }
         });
-
     }
 
     @Override

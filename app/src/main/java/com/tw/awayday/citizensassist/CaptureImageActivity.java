@@ -23,6 +23,7 @@ import static android.provider.MediaStore.ACTION_IMAGE_CAPTURE;
 import static android.widget.Toast.*;
 import static com.koushikdutta.ion.Ion.with;
 import static com.tw.awayday.citizensassist.Constants.REQUEST_IMAGE_CAPTURE;
+import static com.tw.awayday.citizensassist.MainActivity.*;
 import static com.tw.awayday.citizensassist.ServerDetails.SERVER_URL;
 import static com.tw.awayday.citizensassist.ServerDetails.UPLOAD;
 import static com.tw.awayday.citizensassist.UserMessages.IMAGE;
@@ -31,7 +32,6 @@ import static com.tw.awayday.citizensassist.UserMessages.OPENING_CAMERA;
 public class CaptureImageActivity extends AppCompatActivity {
     private ImageView imageView;
     private File file;
-    static String imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +94,8 @@ public class CaptureImageActivity extends AppCompatActivity {
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(JPEG, 100, bytes);
-        imagePath = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        String imagePath = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        newIssue.addImagePath(imagePath);
         return Uri.parse(imagePath);
     }
 
