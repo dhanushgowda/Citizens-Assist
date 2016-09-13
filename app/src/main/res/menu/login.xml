@@ -3,11 +3,9 @@
 
     <item
         android:id="@+id/login"
-        android:showAsAction="always"
         android:title="@string/login" />
 
     <item
         android:id="@+id/AboutUs"
-        android:showAsAction="always"
         android:title="@string/aboutUs" />
 </menu>

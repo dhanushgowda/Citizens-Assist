@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 if (loggedIn) {
                     startActivity(new Intent(MainActivity.this, TagLocationActivity.class));
                 } else {
+                    LoginActivity.redirectedFromIssuePage = true;
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 }
             }
