@@ -4,15 +4,18 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import static android.widget.Toast.*;
+import static com.tw.awayday.citizensassist.Constants.*;
 import static com.tw.awayday.citizensassist.UserMessages.LOGIN_SUCCESSFUL;
+<<<<<<< 8504b6b8afc4552172cfa0181fe970ed1b14c7ee:app/src/main/java/com/tw/awayday/citizensassist/LoginActivityToRaiseIssue.java
 import static com.tw.awayday.citizensassist.UserMessages.OPENING_MAPS;
 import static com.tw.awayday.citizensassist.UserStatus.*;
+=======
+>>>>>>> Swathi| Fixed login issues:app/src/main/java/com/tw/awayday/citizensassist/LoginActivity.java
 
 
-public class LoginActivityToRaiseIssue extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     public static boolean redirectedFromIssuePage = false;
 
@@ -25,6 +28,7 @@ public class LoginActivityToRaiseIssue extends AppCompatActivity {
             public void onClick(View view) {
 <<<<<<< 7e90fc9ac6b6611e55593f3051d6f93b98d1074f:app/src/main/java/com/tw/awayday/citizensassist/LoginActivityToRaiseIssue.java
                 makeText(getApplicationContext(), LOGIN_SUCCESSFUL, LENGTH_SHORT).show();
+<<<<<<< 8504b6b8afc4552172cfa0181fe970ed1b14c7ee:app/src/main/java/com/tw/awayday/citizensassist/LoginActivityToRaiseIssue.java
                 startActivity(new Intent(LoginActivityToRaiseIssue.this, TagLocationActivity.class));
                 UserStatus.loggedIn = true;
                 Toast.makeText(getApplicationContext(), LOGIN_SUCCESSFUL, Toast.LENGTH_SHORT).show();
@@ -45,6 +49,16 @@ public class LoginActivityToRaiseIssue extends AppCompatActivity {
                 loggedIn = true;
                 makeText(getApplicationContext(), LOGIN_SUCCESSFUL, LENGTH_SHORT).show();
 >>>>>>> Swathi | Adds proper forwarding to appropriate pages based on from where login is initiated:app/src/main/java/com/tw/awayday/citizensassist/LoginActivity.java
+=======
+                if (REDIRECTED_FROM_ISSUE_PAGE) {
+                    startActivity(new Intent(LoginActivity.this, TagLocationActivity.class));
+                    REDIRECTED_FROM_ISSUE_PAGE = false;
+
+                } else {
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                }
+                LOGGED_IN = true;
+>>>>>>> Swathi| Fixed login issues:app/src/main/java/com/tw/awayday/citizensassist/LoginActivity.java
             }
         });
     }

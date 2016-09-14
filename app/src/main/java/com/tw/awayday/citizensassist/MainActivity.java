@@ -26,11 +26,14 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.raiseIssueButton).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                newIssue = new IssueContents();
                 if (LOGGED_IN)
                     startActivity(new Intent(MainActivity.this, TagLocationActivity.class));
                 else {
-                    startActivity(new Intent(MainActivity.this, LoginActivityToRaiseIssue.class));
+                    REDIRECTED_FROM_ISSUE_PAGE = true;
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 }
+<<<<<<< 8504b6b8afc4552172cfa0181fe970ed1b14c7ee
                 newIssue = new IssueContents();
                 startActivity(new Intent(MainActivity.this, TagLocationActivity.class));
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
                     LoginActivity.redirectedFromIssuePage = true;
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 }
+=======
+>>>>>>> Swathi| Fixed login issues
             }
         });
     }
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 if (LOGGED_IN)
                     makeText(getApplicationContext(), ALREADY_LOGGED_IN, LENGTH_SHORT).show();
                 else
+<<<<<<< 8504b6b8afc4552172cfa0181fe970ed1b14c7ee
                     startActivity(new Intent(MainActivity.this, LoginActivityFromHamburger.class));
                 if (loggedIn) {
                     loggedIn = false;
@@ -64,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
+=======
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+>>>>>>> Swathi| Fixed login issues
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -55,7 +55,7 @@
             android:label="@string/title_activity_add_comments"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RaiseIssueSuccessActivity" />
-        <activity android:name=".LoginActivityToRaiseIssue" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".CategorySelectionActivity" />
         <activity android:name=".LoginActivityFromHamburger"></activity>
     </application>
