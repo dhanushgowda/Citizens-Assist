@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="#FFFFFF"
     android:padding="@dimen/activity_vertical_margin"
     tools:context="com.tw.awayday.citizensassist.MainActivity">
 
@@ -20,35 +20,47 @@
 
             <Button
                 android:id="@+id/pothole"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
                 android:background="@android:color/transparent"
                 android:drawableBottom="@drawable/pothole"
-                android:text="Pothole : 3rd Block Koramangala" />
+                android:gravity="center"
+                android:text="@string/pothole_3rd_block_koramangala"
+                android:textSize="25dp" />
 
             <Button
                 android:id="@+id/statistics"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:layout_marginBottom="30dp"
                 android:background="@android:color/transparent"
                 android:drawableBottom="@drawable/statistics"
-                android:text="Statistics" />
+                android:text="@string/statistics"
+                android:textSize="25dp" />
 
             <Button
                 android:id="@+id/badStreetLighting"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
                 android:background="@android:color/transparent"
+
                 android:drawableBottom="@drawable/bad_street_lighting"
-                android:text="Bad Street Lighting : 3rd Block Koramangala" />
+                android:text="@string/bad_street_lighting_3rd_block_koramangala"
+                android:textSize="25dp" />
 
             <Button
                 android:id="@+id/cloggedDrain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
                 android:background="@android:color/transparent"
+
                 android:drawableBottom="@drawable/clogged_drain"
-                android:text="Clogged Drain : $th Block Jayanagar" />
+                android:text="@string/clogged_drain_4th_block_jayanagar"
+                android:textSize="25dp" />
         </LinearLayout>
     </ScrollView>
 
@@ -59,11 +71,12 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:background="#294a90"
+        android:background="#00BCCD"
         android:drawableLeft="@drawable/raise_issue"
-        android:text="@string/raise_an_issue"
-        android:textColor="#2ed2ad"
-        android:textStyle="bold" />
+        android:drawableStart="@drawable/raise_issue"
+        android:text="@string/raise_a_complaint"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp" />
 
 </RelativeLayout>
 

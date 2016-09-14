@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">CitizensAssist</string>
-    <string name="raise_an_issue">Raise an issue</string>
+    <string name="raise_a_complaint">Raise a complaint</string>
     <string name="category">Select Category</string>
     <string name="view_history">View history</string>
     <string name="view_all_issues">View all issues</string>
@@ -52,4 +52,8 @@
     <string name="bad_roads">Bad Roads</string>
     <string name="traffic_signals">Traffic signals</string>
     <string name="clogged_drains">Clogged Drains</string>
+    <string name="clogged_drain_4th_block_jayanagar">Clogged Drain : 4th Block Jayanagar</string>
+    <string name="bad_street_lighting_3rd_block_koramangala">Bad Street Lighting : 3rd Block Koramangala</string>
+    <string name="statistics">Statistics</string>
+    <string name="pothole_3rd_block_koramangala">Pothole : 3rd Block Koramangala</string>
 </resources>

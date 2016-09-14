@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:text="@string/raise_an_issue"
+        android:text="@string/raise_a_complaint"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/colorPrimary" />
 
