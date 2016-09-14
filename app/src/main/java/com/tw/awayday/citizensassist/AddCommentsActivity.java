@@ -12,10 +12,9 @@ import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
-import static com.tw.awayday.citizensassist.CaptureImageActivity.*;
+import static android.widget.Toast.*;
 import static com.tw.awayday.citizensassist.MainActivity.*;
 import static com.tw.awayday.citizensassist.ServerDetails.*;
-import static com.tw.awayday.citizensassist.TagLocationActivity.*;
 
 public class AddCommentsActivity extends AppCompatActivity {
     boolean issuedRaisedSuccessfully = false;
@@ -28,7 +27,6 @@ public class AddCommentsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String userComments = ((EditText) findViewById(R.id.comments)).getText().toString();
                 newIssue.addComments(userComments);
-
                 saveIssueInServer();
             }
         });
@@ -47,7 +45,7 @@ public class AddCommentsActivity extends AppCompatActivity {
                         if (issuedRaisedSuccessfully) {
                             startActivity(new Intent(AddCommentsActivity.this, RaiseIssueSuccessActivity.class));
                         } else {
-                            Toast.makeText(getApplicationContext(), "Sorry there was an error. Please try again!", Toast.LENGTH_LONG).show();
+                            makeText(getApplicationContext(), "Sorry there was an error. Please try again!", LENGTH_LONG).show();
                             startActivity(new Intent(AddCommentsActivity.this, MainActivity.class));
                         }
                     }
