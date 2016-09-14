@@ -76,8 +76,7 @@ router.get('/uploads/:file', function (req, res) {
 });
 
 router.post('/raiseIssue', function (req, res) {
-    console.log("Success");
-    res.json({'issueStatus': 'Success'});
+
 });
 
 app.use('/', router);
