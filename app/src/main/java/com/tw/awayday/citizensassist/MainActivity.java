@@ -6,10 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import static android.view.View.OnClickListener;
-import static com.tw.awayday.citizensassist.UserMessages.OPENING_MAPS;
+import static android.widget.Toast.*;
+import static com.tw.awayday.citizensassist.Constants.*;
+import static com.tw.awayday.citizensassist.UserMessages.ALREADY_LOGGED_IN;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -19,7 +20,11 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.raiseIssueButton).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                if (LOGGED_IN)
+                    startActivity(new Intent(MainActivity.this, TagLocationActivity.class));
+                else {
+                    startActivity(new Intent(MainActivity.this, LoginActivityToRaiseIssue.class));
+                }
             }
         });
 
@@ -35,7 +40,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.login:
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                if (LOGGED_IN)
+                    makeText(getApplicationContext(), ALREADY_LOGGED_IN, LENGTH_SHORT).show();
+                else
+                    startActivity(new Intent(MainActivity.this, LoginActivityFromHamburger.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

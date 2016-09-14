@@ -20,6 +20,7 @@ import java.io.File;
 
 import static android.graphics.Bitmap.CompressFormat.JPEG;
 import static android.provider.MediaStore.ACTION_IMAGE_CAPTURE;
+import static android.widget.Toast.*;
 import static com.koushikdutta.ion.Ion.with;
 import static com.tw.awayday.citizensassist.Constants.REQUEST_IMAGE_CAPTURE;
 import static com.tw.awayday.citizensassist.ServerDetails.SERVER_URL;
@@ -40,7 +41,7 @@ public class CaptureImageActivity extends AppCompatActivity {
 
         findViewById(R.id.captureImageButton).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), OPENING_CAMERA, Toast.LENGTH_SHORT).show();
+                makeText(getApplicationContext(), OPENING_CAMERA, LENGTH_SHORT).show();
                 dispatchTakePictureIntent();
             }
         });

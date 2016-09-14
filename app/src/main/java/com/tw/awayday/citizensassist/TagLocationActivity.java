@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -40,6 +41,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import static android.widget.Toast.*;
 import static android.widget.Toast.LENGTH_SHORT;
 import static android.widget.Toast.makeText;
 import static com.google.android.gms.common.api.GoogleApiClient.Builder;
@@ -152,7 +154,6 @@ public class TagLocationActivity extends FragmentActivity implements LocationLis
     @Override
     public void onStart() {
         makeText(getApplicationContext(), OPENING_MAPS, LENGTH_SHORT).show();
-
         super.onStart();
         googleApiClient.connect();
     }
