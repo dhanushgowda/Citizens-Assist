@@ -10,11 +10,13 @@ import android.view.View;
 import com.tw.awayday.citizensassist.Models.IssueContents;
 
 import static android.view.View.OnClickListener;
-import static android.widget.Toast.*;
-import static com.tw.awayday.citizensassist.Constants.*;
+import static android.widget.Toast.LENGTH_LONG;
+import static android.widget.Toast.LENGTH_SHORT;
+import static android.widget.Toast.makeText;
+import static com.tw.awayday.citizensassist.Constants.LOGGED_IN;
+import static com.tw.awayday.citizensassist.Constants.REDIRECTED_FROM_ISSUE_PAGE;
 import static com.tw.awayday.citizensassist.UserMessages.ALREADY_LOGGED_IN;
-import static com.tw.awayday.citizensassist.UserMessages.OPENING_MAPS;
-import static com.tw.awayday.citizensassist.UserStatus.*;
+import static com.tw.awayday.citizensassist.UserStatus.loggedIn;
 
 public class MainActivity extends AppCompatActivity {
     public static IssueContents newIssue;
@@ -33,18 +35,6 @@ public class MainActivity extends AppCompatActivity {
                     REDIRECTED_FROM_ISSUE_PAGE = true;
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 }
-<<<<<<< 8504b6b8afc4552172cfa0181fe970ed1b14c7ee
-                newIssue = new IssueContents();
-                startActivity(new Intent(MainActivity.this, TagLocationActivity.class));
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                if (loggedIn) {
-                    startActivity(new Intent(MainActivity.this, TagLocationActivity.class));
-                } else {
-                    LoginActivity.redirectedFromIssuePage = true;
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                }
-=======
->>>>>>> Swathi| Fixed login issues
             }
         });
     }
@@ -62,17 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 if (LOGGED_IN)
                     makeText(getApplicationContext(), ALREADY_LOGGED_IN, LENGTH_SHORT).show();
                 else
-<<<<<<< 8504b6b8afc4552172cfa0181fe970ed1b14c7ee
-                    startActivity(new Intent(MainActivity.this, LoginActivityFromHamburger.class));
-                if (loggedIn) {
-                    loggedIn = false;
-                    Toast.makeText(getApplicationContext(), "Successfully Logged Out", Toast.LENGTH_LONG).show();
-                    return true;
-                }
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-=======
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
->>>>>>> Swathi| Fixed login issues
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
