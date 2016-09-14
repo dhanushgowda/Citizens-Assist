@@ -8,10 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import static android.widget.ArrayAdapter.createFromResource;
-import static android.widget.Toast.LENGTH_SHORT;
-import static android.widget.Toast.makeText;
 import static com.tw.awayday.citizensassist.MainActivity.newIssue;
-import static com.tw.awayday.citizensassist.UserMessages.OPENING_MAPS;
 
 public class CategorySelectionActivity extends AppCompatActivity {
 
@@ -32,7 +29,6 @@ public class CategorySelectionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String category = spinner.getSelectedItem().toString();
                 newIssue.addCategory(category);
-                makeText(getApplicationContext(), OPENING_MAPS, LENGTH_SHORT).show();
                 startActivity(new Intent(CategorySelectionActivity.this, CaptureImageActivity.class));
             }
         });
