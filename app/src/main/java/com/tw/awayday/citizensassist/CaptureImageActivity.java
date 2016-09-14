@@ -24,6 +24,7 @@ import static android.widget.Toast.*;
 import static com.koushikdutta.ion.Ion.with;
 import static com.tw.awayday.citizensassist.Constants.REQUEST_IMAGE_CAPTURE;
 import static com.tw.awayday.citizensassist.MainActivity.*;
+import static com.tw.awayday.citizensassist.ServerDetails.SERVER_PORT;
 import static com.tw.awayday.citizensassist.ServerDetails.SERVER_URL;
 import static com.tw.awayday.citizensassist.ServerDetails.UPLOAD;
 import static com.tw.awayday.citizensassist.UserMessages.IMAGE;
@@ -60,7 +61,7 @@ public class CaptureImageActivity extends AppCompatActivity {
             file = new File("@mipmap/image_icon");
         }
         with(CaptureImageActivity.this)
-                .load(SERVER_URL + UPLOAD)
+                .load(SERVER_URL + SERVER_PORT + UPLOAD)
                 .setMultipartFile(IMAGE, file)
                 .asString()
                 .withResponse()

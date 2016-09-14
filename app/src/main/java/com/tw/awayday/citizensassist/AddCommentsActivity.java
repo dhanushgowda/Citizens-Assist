@@ -36,7 +36,7 @@ public class AddCommentsActivity extends AppCompatActivity {
 
     private Future<JsonObject> saveIssueInServer() {
         return Ion.with(getApplicationContext())
-                .load(SERVER_URL + RAISE_ISSUE)
+                .load(SERVER_URL + SERVER_PORT + RAISE_ISSUE)
                 .setJsonPojoBody(newIssue)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
