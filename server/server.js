@@ -75,7 +75,10 @@ router.get('/uploads/:file', function (req, res) {
     res.end(img, 'binary');
 });
 
-router.post()
+router.post('/raiseIssue', function (req, res) {
+    console.log("Success");
+    res.json({'issueStatus': 'Success'});
+});
 
 app.use('/', router);
 app.listen(5000);
