@@ -2,8 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/background"
+    android:clickable="false"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -14,26 +15,86 @@
         android:id="@+id/category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/complaint_spinner"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="91dp"
         android:text="@string/category"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Spinner
-        android:id="@+id/complaint_spinner"
-        android:layout_width="250dp"
+    <Button
+        android:id="@+id/potholeButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_alignLeft="@+id/clogged_drains"
+        android:layout_alignStart="@+id/clogged_drains"
+        android:layout_alignTop="@+id/street_lights"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/potholes"
+        android:text="@string/pothole" />
 
     <Button
-        android:id="@+id/nextButton"
-        android:layout_width="150dp"
+        android:id="@+id/clogged_drains"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="52dp"
-        android:text="@string/next" />
+        android:layout_alignLeft="@+id/bad_roads"
+        android:layout_alignStart="@+id/bad_roads"
+        android:layout_alignTop="@+id/malfunctioningTrafficSignal"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/clogged_drains"
+        android:text="@string/clogged_drains" />
+
+    <Button
+        android:id="@+id/malfunctioningTrafficSignal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/roadside_garbage"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="44dp"
+        android:layout_marginTop="24dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/malfunctioning_traffic_signal"
+        android:text="@string/traffic_signals" />
+
+    <Button
+        android:id="@+id/bad_roads"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/roadside_garbage"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/bad_roads"
+        android:text="@string/bad_roads" />
+
+    <Button
+        android:id="@+id/street_lights"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/roadside_garbage"
+        android:layout_alignStart="@+id/roadside_garbage"
+        android:layout_below="@+id/malfunctioningTrafficSignal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/street_lights"
+        android:text="@string/street_lights" />
+
+    <Button
+        android:id="@+id/roadside_garbage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/category"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="14dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/roadside_garbage"
+        android:text="@string/roadside_garbage" />
 
 </RelativeLayout>

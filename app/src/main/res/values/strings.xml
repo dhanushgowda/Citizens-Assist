@@ -45,4 +45,11 @@
     <string name="password">Password</string>
     <string name="addComment">Add Comments</string>
     <string name="aboutUs">About us</string>
+    <string name="pothole">Pothole</string>
+    <string name="malfunctioning_traffic_signal">Malfunctioning traffic signal</string>
+    <string name="street_lights">Street Lights</string>
+    <string name="roadside_garbage">Roadside Garbage</string>
+    <string name="bad_roads">Bad Roads</string>
+    <string name="traffic_signals">Traffic signals</string>
+    <string name="clogged_drains">Clogged Drains</string>
 </resources>
