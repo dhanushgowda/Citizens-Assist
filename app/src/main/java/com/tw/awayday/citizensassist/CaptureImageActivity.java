@@ -10,7 +10,6 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Response;
@@ -20,10 +19,11 @@ import java.io.File;
 
 import static android.graphics.Bitmap.CompressFormat.JPEG;
 import static android.provider.MediaStore.ACTION_IMAGE_CAPTURE;
-import static android.widget.Toast.*;
+import static android.widget.Toast.LENGTH_SHORT;
+import static android.widget.Toast.makeText;
 import static com.koushikdutta.ion.Ion.with;
 import static com.tw.awayday.citizensassist.Constants.REQUEST_IMAGE_CAPTURE;
-import static com.tw.awayday.citizensassist.MainActivity.*;
+import static com.tw.awayday.citizensassist.MainActivity.newIssue;
 import static com.tw.awayday.citizensassist.ServerDetails.SERVER_PORT;
 import static com.tw.awayday.citizensassist.ServerDetails.SERVER_URL;
 import static com.tw.awayday.citizensassist.ServerDetails.UPLOAD;

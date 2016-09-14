@@ -10,13 +10,11 @@ import android.view.View;
 import com.tw.awayday.citizensassist.Models.IssueContents;
 
 import static android.view.View.OnClickListener;
-import static android.widget.Toast.LENGTH_LONG;
 import static android.widget.Toast.LENGTH_SHORT;
 import static android.widget.Toast.makeText;
 import static com.tw.awayday.citizensassist.Constants.LOGGED_IN;
 import static com.tw.awayday.citizensassist.Constants.REDIRECTED_FROM_ISSUE_PAGE;
 import static com.tw.awayday.citizensassist.UserMessages.ALREADY_LOGGED_IN;
-import static com.tw.awayday.citizensassist.UserStatus.loggedIn;
 
 public class MainActivity extends AppCompatActivity {
     public static IssueContents newIssue;

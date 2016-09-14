@@ -5,16 +5,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
-import static android.widget.Toast.*;
-import static com.tw.awayday.citizensassist.MainActivity.*;
-import static com.tw.awayday.citizensassist.ServerDetails.*;
+import static android.widget.Toast.LENGTH_LONG;
+import static android.widget.Toast.makeText;
+import static com.tw.awayday.citizensassist.MainActivity.newIssue;
+import static com.tw.awayday.citizensassist.ServerDetails.RAISE_ISSUE;
+import static com.tw.awayday.citizensassist.ServerDetails.SERVER_PORT;
+import static com.tw.awayday.citizensassist.ServerDetails.SERVER_URL;
 
 public class AddCommentsActivity extends AppCompatActivity {
     boolean issuedRaisedSuccessfully = false;

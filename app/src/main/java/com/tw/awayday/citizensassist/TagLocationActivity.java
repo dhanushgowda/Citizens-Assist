@@ -19,7 +19,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -41,7 +40,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import static android.widget.Toast.*;
 import static android.widget.Toast.LENGTH_SHORT;
 import static android.widget.Toast.makeText;
 import static com.google.android.gms.common.api.GoogleApiClient.Builder;
@@ -50,10 +48,17 @@ import static com.google.android.gms.common.api.GoogleApiClient.OnConnectionFail
 import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_NORMAL;
 import static com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
 import static com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
+import static com.tw.awayday.citizensassist.LocationFetcherConstants.CONNECTION_FAILED;
+import static com.tw.awayday.citizensassist.LocationFetcherConstants.CURRENT_LOCATION;
+import static com.tw.awayday.citizensassist.LocationFetcherConstants.FIRING_ON_LOCATION_CHANGED;
+import static com.tw.awayday.citizensassist.LocationFetcherConstants.ISSUE_ADDRESS;
+import static com.tw.awayday.citizensassist.LocationFetcherConstants.LOCATION_UPDATE_RESUMED;
+import static com.tw.awayday.citizensassist.LocationFetcherConstants.LOCATION_UPDATE_STOPPED;
+import static com.tw.awayday.citizensassist.LocationFetcherConstants.ON_CONNECTED_IS_CONNECTED;
+import static com.tw.awayday.citizensassist.LocationFetcherConstants.ON_CREATE;
+import static com.tw.awayday.citizensassist.LocationFetcherConstants.POSITION;
+import static com.tw.awayday.citizensassist.LocationFetcherConstants.TAG;
 import static com.tw.awayday.citizensassist.UserMessages.OPENING_MAPS;
-import static com.tw.awayday.citizensassist.LocationFetcherConstants.*;
-
-
 import static com.tw.awayday.citizensassist.UserMessages.Tag_Location;
 
 public class TagLocationActivity extends FragmentActivity implements LocationListener,
