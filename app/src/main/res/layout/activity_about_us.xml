@@ -9,18 +9,18 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.tw.awayday.citizensassist.AboutUsActivity">
 
-    <WebView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/web_view"
-        android:layout_above="@+id/button" />
-
     <Button
-        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
+        android:id="@+id/homeButton"
         android:text="@string/home" />
+
+    <TextView
+        android:id="@+id/about_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="61dp" />
+
 </RelativeLayout>
