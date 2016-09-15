@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_vertical_margin">
+
+    <TextView
+        android:id="@+id/number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Complaint Number  :   1034\nIssue Number  :   208"
+        android:textSize="20dp" />
+
+    <ImageView
+        android:id="@+id/photo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/number"
+        android:src="@drawable/pothole" />
+
+    <TextView
+        android:id="@+id/complaintType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/number"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="28dp"
+        android:layout_toEndOf="@+id/photo"
+        android:layout_toRightOf="@+id/photo"
+        android:text="Type : Pothole\nDate Raised : 12/06/2016\nStatus : Closed" />
+
+
+    <ImageView
+        android:id="@+id/mapLocation"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/complaintType"
+        android:src="@drawable/location" />
+
+    <TextView
+        android:id="@+id/locationDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/complaintType"
+        android:layout_alignLeft="@+id/complaintType"
+        android:layout_alignRight="@+id/complaintType"
+        android:layout_alignStart="@+id/complaintType"
+        android:layout_below="@+id/photo"
+        android:text="Location : Koramangala Water Tank, 3rd Block, Bengaluru, India" />
+
+    <Button
+        android:id="@+id/discussComplaintButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="#00BCCD"
+        android:drawableLeft="@drawable/discussion"
+        android:text="@string/discussComplaint"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/homeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        android:textStyle="bold"
+        android:layout_below="@+id/mapLocation"
+        android:layout_toLeftOf="@+id/locationDetails"
+        android:layout_toStartOf="@+id/locationDetails" />
+
+</RelativeLayout>
