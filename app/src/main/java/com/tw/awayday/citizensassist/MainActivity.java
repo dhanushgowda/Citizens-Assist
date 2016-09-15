@@ -35,6 +35,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        findViewById(R.id.pothole).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ViewComplaint.class));
+            }
+        });
+
     }
 
     @Override
