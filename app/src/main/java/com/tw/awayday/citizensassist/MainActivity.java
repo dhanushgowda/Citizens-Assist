@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 else
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 return true;
+
+            case R.id.AboutUs:
+                startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }
