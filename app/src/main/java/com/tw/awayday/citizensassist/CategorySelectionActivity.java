@@ -21,7 +21,6 @@ public class CategorySelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 newIssue.addCategory("Potholes");
-                makeText(getApplicationContext(), OPENING_MAPS, LENGTH_SHORT).show();
                 startActivity(new Intent(CategorySelectionActivity.this, CaptureImageActivity.class));
             }
         });
@@ -29,7 +28,6 @@ public class CategorySelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 newIssue.addCategory("Clogged Drains");
-                makeText(getApplicationContext(), OPENING_MAPS, LENGTH_SHORT).show();
                 startActivity(new Intent(CategorySelectionActivity.this, CaptureImageActivity.class));
             }
         });
@@ -37,7 +35,6 @@ public class CategorySelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 newIssue.addCategory("Bad Roads");
-                makeText(getApplicationContext(), OPENING_MAPS, LENGTH_SHORT).show();
                 startActivity(new Intent(CategorySelectionActivity.this, CaptureImageActivity.class));
             }
         });
@@ -45,7 +42,6 @@ public class CategorySelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 newIssue.addCategory("Roadside Garbage");
-                makeText(getApplicationContext(), OPENING_MAPS, LENGTH_SHORT).show();
                 startActivity(new Intent(CategorySelectionActivity.this, CaptureImageActivity.class));
             }
         });
@@ -53,7 +49,6 @@ public class CategorySelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 newIssue.addCategory("Traffic Signals");
-                makeText(getApplicationContext(), OPENING_MAPS, LENGTH_SHORT).show();
                 startActivity(new Intent(CategorySelectionActivity.this, CaptureImageActivity.class));
             }
         });
@@ -61,7 +56,6 @@ public class CategorySelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 newIssue.addCategory("Street Lights");
-                makeText(getApplicationContext(), OPENING_MAPS, LENGTH_SHORT).show();
                 startActivity(new Intent(CategorySelectionActivity.this, CaptureImageActivity.class));
             }
         });

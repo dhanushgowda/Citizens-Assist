@@ -15,7 +15,7 @@ import static android.widget.Toast.LENGTH_LONG;
 import static android.widget.Toast.makeText;
 import static com.tw.awayday.citizensassist.MainActivity.newIssue;
 import static com.tw.awayday.citizensassist.ServerDetails.RAISE_ISSUE;
-import static com.tw.awayday.citizensassist.ServerDetails.SERVER_PORT;
+
 import static com.tw.awayday.citizensassist.ServerDetails.SERVER_URL;
 
 public class AddCommentsActivity extends AppCompatActivity {
@@ -36,7 +36,7 @@ public class AddCommentsActivity extends AppCompatActivity {
 
     private Future<JsonObject> saveIssueInServer() {
         return Ion.with(getApplicationContext())
-                .load(SERVER_URL + SERVER_PORT + RAISE_ISSUE)
+                .load(SERVER_URL + RAISE_ISSUE)
                 .setJsonPojoBody(newIssue)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
