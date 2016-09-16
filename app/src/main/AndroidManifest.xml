@@ -58,7 +58,11 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".CategorySelectionActivity" />
         <activity android:name=".AboutUsActivity" />
-        <activity android:name=".ViewComplaint"></activity>
+        <activity android:name=".ViewComplaintActivity" />
+        <activity
+            android:name=".StatisticsActivity"
+            android:label="@string/title_activity_statistics"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

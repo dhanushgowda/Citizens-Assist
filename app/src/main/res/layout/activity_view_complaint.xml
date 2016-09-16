@@ -63,7 +63,7 @@
         android:layout_alignParentRight="true"
         android:background="#00BCCD"
         android:drawableLeft="@drawable/discussion"
-        android:text="@string/discussComplaint"
+        android:text="@string/discuss_complaint"
         android:textColor="#FFFFFF"
         android:textSize="25sp" />
 

@@ -39,7 +39,14 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.pothole).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ViewComplaint.class));
+                startActivity(new Intent(MainActivity.this, ViewComplaintActivity.class));
+            }
+        });
+
+        findViewById(R.id.statistics).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, StatisticsActivity.class));
             }
         });
 
