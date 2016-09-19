@@ -65,12 +65,13 @@
 
         <Button
             android:id="@+id/submit_button"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:text="@string/submit"
             android:background="#00BCCD"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:layout_gravity="center_horizontal" />
     </RadioGroup>
 
     <RadioGroup
