@@ -10,9 +10,9 @@
     tools:context="com.tw.awayday.citizensassist.AboutUsActivity">
 
     <Button
+        android:id="@+id/homeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/homeButton"
         android:text="@string/home" />
 
     <TextView

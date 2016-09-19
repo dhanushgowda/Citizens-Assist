@@ -64,17 +64,16 @@ import static com.tw.awayday.citizensassist.UserMessages.Tag_Location;
 public class TagLocationActivity extends FragmentActivity implements LocationListener,
         ConnectionCallbacks, OnConnectionFailedListener, OnMapReadyCallback, OnMarkerDragListener {
 
-    private GoogleMap map;
-    private Geocoder geocoder;
     private static final long INTERVAL = 1000 * 10;
     private static final long FASTEST_INTERVAL = 1000 * 5;
-
-    Button sendLocationButton;
     public static LatLng position;
+    Button sendLocationButton;
     TextView locationTextView;
     LocationRequest locationRequest;
     GoogleApiClient googleApiClient;
     Location currentLocation;
+    private GoogleMap map;
+    private Geocoder geocoder;
     private Marker marker;
 
     @Override

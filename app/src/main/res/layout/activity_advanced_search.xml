@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.tw.awayday.citizensassist.AdvancedSearchActivity">
+
+    <RadioGroup
+        android:id="@+id/default_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/options_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/customize_search"
+            android:textAlignment="center"
+            android:textColor="#4281a4"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            tools:targetApi="jelly_bean_mr1" />
+
+        <Button
+            android:id="@+id/state_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="#4281a4"
+            android:text="@string/select_state"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/city_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="#4281a4"
+            android:text="@string/select_city"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/area_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="#4281a4"
+            android:text="@string/select_area"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/issue_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="#4281a4"
+            android:text="@string/select_issue"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:background="#FFE66D"
+            android:text="@string/submit"
+            android:textColor="#FFFFFF" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/state_select_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/karnataka" />
+
+        <Button
+            android:id="@+id/state_select_group_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submit" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/city_select_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bangalore" />
+
+        <Button
+            android:id="@+id/city_select_group_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/submit" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/area_select_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/koramangala" />
+
+        <Button
+            android:id="@+id/area_select_group_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submit" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/issue_select_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/potholes" />
+
+        <Button
+            android:id="@+id/issue_select_group_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submit" />
+    </RadioGroup>
+
+</RelativeLayout>

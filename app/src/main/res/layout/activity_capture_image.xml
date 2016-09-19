@@ -18,12 +18,12 @@
         android:id="@+id/captureImageText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/capture_image"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_above="@+id/captureImageButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="46dp" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="46dp"
+        android:text="@string/capture_image"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageButton
         android:id="@+id/captureImageButton"

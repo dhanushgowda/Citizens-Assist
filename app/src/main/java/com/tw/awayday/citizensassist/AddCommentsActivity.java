@@ -15,7 +15,6 @@ import static android.widget.Toast.LENGTH_LONG;
 import static android.widget.Toast.makeText;
 import static com.tw.awayday.citizensassist.MainActivity.newIssue;
 import static com.tw.awayday.citizensassist.ServerDetails.RAISE_ISSUE;
-
 import static com.tw.awayday.citizensassist.ServerDetails.SERVER_URL;
 
 public class AddCommentsActivity extends AppCompatActivity {

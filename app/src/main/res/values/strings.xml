@@ -45,4 +45,19 @@
     <string name="pie_chart">PieChart</string>
     <string name="need_a_more_detailed_search">Need a more detailed search?</string>
     <string name="statistics_title">STATISTICS</string>
+    <string name="customize_search">Customize your search</string>
+    <string name="select_state">Select State</string>
+    <string name="select_city">Select City</string>
+    <string name="select_area">Select Area</string>
+    <string name="select_issue">Select Issue</string>
+    <string name="you_searched_for_potholes_in_kormangala_bangalore_karnataka">You searched for Potholes in Kormangala, Bangalore, Karnataka.</string>
+    <string name="fixed_333">FIXED: 333</string>
+    <string name="in_progress_200">IN PROGRESS: 200</string>
+    <string name="estimated_600">ESTIMATED: 600</string>
+    <string name="open_1000">OPEN : 1000</string>
+    <string name="_2133_pothole_complaints">2133 POTHOLE COMPLAINTS</string>
+    <string name="potholes">Potholes</string>
+    <string name="koramangala">Koramangala</string>
+    <string name="bangalore">Bangalore</string>
+    <string name="karnataka">Karnataka</string>
 </resources>

@@ -71,10 +71,10 @@
         android:id="@+id/homeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home"
-        android:textStyle="bold"
         android:layout_below="@+id/mapLocation"
         android:layout_toLeftOf="@+id/locationDetails"
-        android:layout_toStartOf="@+id/locationDetails" />
+        android:layout_toStartOf="@+id/locationDetails"
+        android:text="Home"
+        android:textStyle="bold" />
 
 </RelativeLayout>
