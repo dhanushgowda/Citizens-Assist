@@ -64,7 +64,7 @@
         android:background="#00BCCD"
         android:drawableLeft="@drawable/discussion"
         android:text="@string/discuss_complaint"
-        android:textColor="#FFFFFF"
+        android:textColor="#ffffffff"
         android:textSize="25sp" />
 
     <Button
@@ -74,7 +74,9 @@
         android:layout_below="@+id/mapLocation"
         android:layout_toLeftOf="@+id/locationDetails"
         android:layout_toStartOf="@+id/locationDetails"
+        android:background="#00BCCD"
         android:text="Home"
+        android:textColor="#ffffffff"
         android:textStyle="bold" />
 
 </RelativeLayout>

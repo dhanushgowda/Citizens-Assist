@@ -7,20 +7,91 @@
 
     <TextView
         android:id="@+id/successMessage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
         android:gravity="center"
-        android:text="Issue raised successfully"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="Thank you for helping better our city!"
+        android:textColor="#304FFE"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/homeButton"
+        android:layout_alignStart="@+id/homeButton"
+        android:layout_below="@+id/successMessage"
+        android:layout_marginTop="37dp"
+        android:gravity="center"
+        android:text="Your complaint raised successfully"
+        android:textSize="17dp" />
+
+    <TextView
+        android:id="@+id/complaintDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView2"
+        android:gravity="center"
+        android:text="Complaint Number : 1034\nIssue Number :208"
+        android:textSize="17dp" />
+
+    <TextView
+        android:id="@+id/summaryButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="Click here to view a Summary of the complaint"
+        android:textColor="@color/colorPrimary"
+        android:textColorLink="#576586"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/summaryButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="Click here to see what others are saying about the issue"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/homeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="107dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="34dp"
+        android:layout_marginLeft="66dp"
+        android:layout_marginStart="66dp"
+        android:background="#00BCCD"
         android:text="Home"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/profileButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/homeButton"
+        android:layout_marginLeft="65dp"
+        android:layout_marginStart="65dp"
+        android:layout_toEndOf="@+id/homeButton"
+        android:layout_toRightOf="@+id/homeButton"
+        android:background="#00BCCD"
+        android:text="My Profile"
+        android:textColor="#FFFFFF"
         android:textStyle="bold" />
 
 </RelativeLayout>

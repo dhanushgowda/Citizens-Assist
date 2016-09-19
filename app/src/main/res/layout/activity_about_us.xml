@@ -13,7 +13,12 @@
         android:id="@+id/homeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/home" />
+        android:background="#00BCCD"
+        android:textColor="#FFFFFF"
+        android:text="@string/home"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/about_us"

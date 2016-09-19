@@ -25,9 +25,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#ffff1a7c"
+        android:background="#00BCCD"
         android:text="Send my location"
-        android:textColor="#ffffffff" />
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/location_view"
