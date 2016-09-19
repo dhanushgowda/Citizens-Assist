@@ -4,17 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:text="@string/raise_a_complaint"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/colorPrimary" />
-
-
-    <TextView
+     <TextView
         android:id="@+id/captureImageText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

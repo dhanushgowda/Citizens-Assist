@@ -6,15 +6,6 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:text="@string/raise_a_complaint"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/colorPrimary" />
-
-    <TextView
         android:id="@+id/addComments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +33,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="52dp"
         android:background="#00BCCD"
-        android:textColor="#FFFFFF"
-        android:text="@string/submit" />
+        android:text="@string/submit"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>

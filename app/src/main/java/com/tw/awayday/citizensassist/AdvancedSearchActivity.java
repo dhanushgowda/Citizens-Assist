@@ -3,6 +3,8 @@ package com.tw.awayday.citizensassist;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 public class AdvancedSearchActivity extends AppCompatActivity {
@@ -74,5 +76,22 @@ public class AdvancedSearchActivity extends AppCompatActivity {
                 startActivity(new Intent(AdvancedSearchActivity.this, SearchResultActivity.class));
             }
         });
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.hamburger, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.AboutUs:
+                startActivity(new Intent(AdvancedSearchActivity.this, AboutUsActivity.class));
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
