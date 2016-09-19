@@ -19,7 +19,7 @@
             android:id="@+id/options_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:text="@string/customize_search"
             android:textAlignment="center"
             android:textColor="#4281a4"
@@ -67,7 +67,7 @@
             android:id="@+id/submit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:text="@string/submit"
             android:background="#00BCCD"
             android:textColor="#FFFFFF"/>
