@@ -23,7 +23,9 @@ public class SearchResultActivity extends AppCompatActivity {
         findViewById(R.id.home_page_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SearchResultActivity.this, MainActivity.class));
+                Intent mainActivity = new Intent(SearchResultActivity.this, MainActivity.class);
+                mainActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(mainActivity);
             }
         });
     }

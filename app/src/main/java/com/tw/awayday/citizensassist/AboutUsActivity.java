@@ -28,7 +28,9 @@ public class AboutUsActivity extends AppCompatActivity {
         findViewById(R.id.homeButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AboutUsActivity.this, MainActivity.class));
+                Intent mainActivity = new Intent(AboutUsActivity.this, MainActivity.class);
+                mainActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(mainActivity);
             }
         });
     }

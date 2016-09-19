@@ -19,6 +19,15 @@ public class StatisticsActivity extends AppCompatActivity {
                 startActivity(new Intent(StatisticsActivity.this, AdvancedSearchActivity.class));
             }
         });
+
+        findViewById(R.id.homeButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainActivity = new Intent(StatisticsActivity.this, MainActivity.class);
+                mainActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(mainActivity);
+            }
+        });
     }
 
     @Override
