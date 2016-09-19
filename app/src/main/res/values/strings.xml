@@ -60,4 +60,6 @@
     <string name="koramangala">Koramangala</string>
     <string name="bangalore">Bangalore</string>
     <string name="karnataka">Karnataka</string>
+    <string name="summary"><u>Click here to view a Summary of the complaint</u></string>
+    <string name="othersSay"><u>Click here to see what others are saying about the issue</u></string>
 </resources>

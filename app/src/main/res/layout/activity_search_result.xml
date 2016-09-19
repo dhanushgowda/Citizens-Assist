@@ -13,11 +13,10 @@
         android:id="@+id/search_content_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFE66D"
         android:padding="5dp"
         android:text="@string/you_searched_for_potholes_in_kormangala_bangalore_karnataka"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="30sp"
         tools:targetApi="jelly_bean_mr1" />
 
@@ -105,7 +104,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="10dp"
-        android:background="#FFE66D"
+        android:background="#00BCCD"
         android:text="NEW SEARCH"
         android:textColor="#FFFFFF" />
 
@@ -116,7 +115,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="#FFE66D"
+        android:background="#00BCCD"
         android:text="HOME PAGE"
         android:textColor="#FFFFFF" />
 

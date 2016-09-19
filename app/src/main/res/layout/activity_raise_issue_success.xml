@@ -48,7 +48,7 @@
         android:layout_centerVertical="true"
         android:clickable="true"
         android:gravity="center"
-        android:text="Click here to view a Summary of the complaint"
+        android:text="@string/summary"
         android:textColor="@color/colorPrimary"
         android:textColorLink="#576586"
         android:textSize="20dp" />
@@ -61,7 +61,7 @@
         android:layout_marginTop="32dp"
         android:clickable="true"
         android:gravity="center"
-        android:text="Click here to see what others are saying about the issue"
+        android:text="@string/othersSay"
         android:textColor="@color/colorPrimary"
         android:textSize="20dp" />
 
